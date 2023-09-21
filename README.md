@@ -133,6 +133,22 @@ A couple of things is in my mind.
 
 ## <a id="testing"></a>Testing
 
+I started to stuggle a bit with updating cells in google sheet.
+I wanted the cells to update with one row of data:<br>
+     ```character_data = [player_name, char_name, char_str, char_sta, char_cha] ```<br>
+     ```player_sheet.update("A2:E2", [character_data]) ```
+
+Event though it works the terminal gives me the following warning:<br>
+    " ```/home/codeany/.local/lib/python3.8/site-packages/gspread/worksheet.py:1069: UserWarning: [Deprecated][in version 6.0.0]: method signature will change to: 'Worksheet.update(value = [[]], range_name=)' arguments 'range_name' and 'values' will swap, values will be mandatory of type: 'list(list(...))'
+  warnings.warn(" ```
+
+So I changed it to update each cell individually. Not pretty, I know, but couldn't find a way to get it working without a warning.<br>
+     ```player_sheet.update_acell('A2', player_name)```<br>
+     ```player_sheet.update_acell('B2', char_name)```<br>
+     ```player_sheet.update_acell('C2', char_str)```<br>
+     ```player_sheet.update_acell('D2', char_sta)```<br>
+     ```player_sheet.update_acell('E2', char_cha)```<br>
+
 In contrast to the first project. I continuously tested the code along to with coding to make sure everything is ok.
 
 Some things that come up is to add a header to each section in the html code. But I later changed the sections and just had one header added.
