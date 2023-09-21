@@ -8,6 +8,13 @@ SCOPE = [
     "https://www.googleapis.com/auth/drive"
     ]
 
+# ANSI color codes
+RED = '\033[91m'
+GREEN = '\033[92m'
+YELLOW = '\033[93m'
+BLUE = '\033[94m'
+END_COLOR = '\033[0m'  # Reset color to default
+
 CREDS = Credentials.from_service_account_file('creds.json')
 SCOPED_CREDS = CREDS.with_scopes(SCOPE)
 GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
@@ -166,9 +173,18 @@ def end_now():
 def main():
     # add function to check if story is ongoing and if, choose to reset or continue.
     set_player()
-    storyline = get_story()
-    print(storyline)
-    end_now()
+    while True:
+        storyline = get_story()
+        #print(storyline)
+        print(YELLOW + storyline + END_COLOR)
+        if not ask_to_continue():
+            choice = reset_or_save()
+            if choice == 'reset':
+                reset_story()
+                break  # Exit the game loop
+            elif choice == 'save':
+                break  # Exit the game loop
+    print("Game saved. Goodbye!")
 
 
 if __name__ == '__main__':
