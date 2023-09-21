@@ -1,5 +1,6 @@
 import gspread
 from google.oauth2.service_account import Credentials
+import random
 
 SCOPE = [
     "https://www.googleapis.com/auth/spreadsheets",
@@ -60,15 +61,13 @@ def set_player():
         except ValueError:
             print("Please enter numeric values only.")
 
-    # Now you have valid values for char_str, char_sta, and char_cha
-    print(f"Welcome to the world {char_name}! Your stats")
+    # Shoow valid values for char_str, char_sta, and char_cha to player
+    print(f"Welcome to the world {char_name}! Your stats are:")
     print(f"Strength: {char_str}\nStamina: {char_sta}\nCharisma: {char_cha}")
-
 
     # Open the "player" sheet
     player_sheet = SHEET.worksheet('player')
     
-
     #character_data = [player_name, char_name, char_str, char_sta, char_cha]
     #player_sheet.update("A2:E2", [character_data])
     player_sheet.update_acell('A2', player_name)
@@ -77,6 +76,16 @@ def set_player():
     player_sheet.update_acell('D2', char_sta)
     player_sheet.update_acell('E2', char_cha)
 
+def roll_t10_dice():
+    """
+    Simulate rolling a ten-sided dice.
+    Returns a random integer between 1 and 10.
+    """
+    return random.randint(1, 10)
+
+# Example usage:
+result = roll_t10_dice()
+print(f"You rolled a {result}")
 
 def main():
     set_player()
