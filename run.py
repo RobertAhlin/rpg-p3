@@ -83,12 +83,92 @@ def roll_t10_dice():
     """
     return random.randint(1, 10)
 
-# Example usage:
-result = roll_t10_dice()
-print(f"You rolled a {result}")
+    # Example usage:
+    result = roll_t10_dice()
+    print(f"You rolled a {result}")
+
+def get_story():
+    """
+    Get one value from the 'story' sheet in your Google Sheet.
+    Mark column A with 'x' if column B has been collected.
+    Return the collected value.
+    """
+    story_sheet = SHEET.worksheet('story')
+    story_data = story_sheet.get_all_values()
+
+    last_retrieved_index = 0
+
+    while last_retrieved_index < len(story_data):
+        row = story_data[last_retrieved_index]
+        if row[0] == 'x':
+            last_retrieved_index += 1
+            continue  # Skip rows that have already been collected
+        if row[1]:  # Check if column B has a value
+            story_sheet.update_cell(last_retrieved_index + 1, 1, 'x')  # Mark column A with 'x'
+            return row[1]
+
+    return None  # Return None if all rows have been collected
+
+def ask_to_continue():
+    """
+    Ask the player if they want to continue or quit.
+    Returns True to continue or False to quit.
+    """
+    while True:
+        choice = input("Do you want to continue (y) or quit (n)? ").lower()
+        if choice == 'y':
+            return True
+        elif choice == 'n':
+            return False
+        else:
+            print("Invalid choice. Please enter 'y' to continue or 'n' to quit.")
+
+def reset_or_save():
+    """
+    Ask the player if they want to reset the story or save and quit.
+    Returns 'reset' to reset the story or 'save' to save and quit.
+    """
+    while True:
+        choice = input("Do you want to reset the story (r) or save and quit (s)? ").lower()
+        if choice == 'r':
+            return 'reset'
+        elif choice == 's':
+            return 'save'
+        else:
+            print("Invalid choice. Please enter 'r' to reset or 's' to save and quit.")
+
+def reset_story():
+    # Get all values from column A
+    story_sheet = SHEET.worksheet('story')
+    column_a_values = story_sheet.col_values(1)
+
+    # Remove all 'x' values
+    for i, value in enumerate(column_a_values):
+        if value == 'x':
+            story_sheet.update_cell(i + 1, 1, '')
+
+    print("Story completely resetted.")
+
+def end_now():
+    while True:
+        # Ask if the player wants to continue or quit
+        if not ask_to_continue():
+            # Ask if the player wants to reset or save
+            choice = reset_or_save()
+            if choice == 'reset':
+                # Reset the story (remove 'x' from column A)
+                reset_story()
+            elif choice == 'save':
+                # Save and quit the game
+                exit()
+            break  # Exit the game loop
 
 def main():
+    # add function to check if story is ongoing and if, choose to reset or continue.
     set_player()
+    storyline = get_story()
+    print(storyline)
+    end_now()
 
 
 if __name__ == '__main__':
