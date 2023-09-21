@@ -15,6 +15,7 @@ SHEET = GSPREAD_CLIENT.open('rpg_p3')
 def set_player_name():
     """
     Ask for the players name.
+    Store the player's name in Google sheet
     """
     print("Please enter your name.")
     print("Just one name with one word.")
@@ -22,4 +23,14 @@ def set_player_name():
     player_name_str = input("Enter your name: ")
     print(f"Welcome to the game {player_name_str}.")
 
-set_player_name()
+    # Open the "player" sheet
+    player_sheet = SHEET.worksheet('player')
+
+    # Update cell A2 with the player's name
+    player_sheet.update_acell('A2', player_name_str)
+
+def main():
+    set_player_name()
+
+if __name__ == '__main__':
+    main()
