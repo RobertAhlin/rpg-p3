@@ -251,15 +251,15 @@ def dice_roll_journey():
                     # Convert new_char_str_value to an integer
                     new_char_str = int(new_char_str_value)
                 except ValueError:
-                    print("Error: The value in cell D2 is not a valid integer.")
+                    print("Error: The value in cell C2 is not a valid integer.")
             else:
-                print("Error: The value in cell D2 is None.")
+                print("Error: The value in cell C2 is None.")
 
             # Check if the Stamina value is not None
             if new_char_sta_value is not None:
                 try:
                     # Convert new_char_str_value to an integer
-                    new_char_sta = int(new_char_str_value)
+                    new_char_sta = int(new_char_sta_value)
                 except ValueError:
                     print("Error: The value in cell D2 is not a valid integer.")
             else:
@@ -293,6 +293,62 @@ def dice_roll_journey():
         else:
             print("Invalid choice. Please enter 'y' to roll or 'n' to end the game.")    
 
+def dice_roll_meeting():
+    """
+    Perform a dice roll and display the result.
+    Then, depending on the result of the dice roll combined with charisma,
+    print the corresponding row from the 'diceroll' sheet.
+    """
+    # Get the 'diceroll' sheet
+    diceroll_sheet = SHEET.worksheet('diceroll')
+
+    while True:
+        choice = input("Do you want to roll the dice? (y/n):\n").lower()
+        if choice == 'y':
+            # Perform a dice roll (random 1-6)
+            dice_value = random.randint(1, 6)
+
+            # Get character stat from sheet.
+            player_sheet = SHEET.worksheet('player')
+            new_char_cha_value = player_sheet.acell('E2').value
+
+            # Check if the Strength value is not None
+            if new_char_cha_value is not None:
+                try:
+                    # Convert new_char_str_value to an integer
+                    new_char_str = int(new_char_cha_value)
+                except ValueError:
+                    print("Error: The value in cell E2 is not a valid integer.")
+            else:
+                print("Error: The value in cell E2 is None.")
+
+            # Add value from strength and count for average
+            result = (dice_value + new_char_cha)
+
+            # Display the result of the dice roll
+            print(BLUE + f"With a roll of the dice combined with your cahrisma, you invoke a surge\nof luck and chance. The dice dance through the air,\nand as they land, they reveal their outcome: {dice_value}" + END_COLOR)
+
+            # Display result 
+            print(BLUE + f" Your dice roll combined with your strength and stamina gives you the power of {result}" + END_COLOR)
+
+            # Determine which row to print based on the dice roll result
+            if 1 <= result <= 4:
+                row = diceroll_sheet.row_values(10)
+            elif 5 <= result <= 11:
+                row = diceroll_sheet.row_values(11)
+            elif result <= 12:
+                row = diceroll_sheet.row_values(12)
+
+            # Print the corresponding row
+            for cell_value in row:
+                print(YELLOW + cell_value + END_COLOR)
+                break
+            return
+        elif choice == 'n':
+            print("You chose not to roll the dice. Ending the game.")
+            return False
+        else:
+            print("Invalid choice. Please enter 'y' to roll or 'n' to end the game.")
 
 def main():
     set_player()
@@ -306,6 +362,9 @@ def main():
 
             # Check if the storyline ends with "With a roll of the dice, you determine your fate."
             dice_roll_journey() if storyline.endswith("With a roll of the dice, you determine your fate.") else None
+
+            # Check if the storyline ends with "with every word and gesture."
+            dice_roll_meeting() if storyline.endswith("with every word and gesture.") else None
 
             if not ask_to_continue():
                 choice = reset_or_save()
