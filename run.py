@@ -170,13 +170,55 @@ def end_now():
                 exit()
             break  # Exit the game loop
 
+def dice_roll():
+    """
+    Perform a dice roll and display the result.
+    Then, depending on the result, print the corresponding row from the 'diceroll' sheet.
+    """
+    # Get the 'diceroll' sheet
+    diceroll_sheet = SHEET.worksheet('diceroll')
+
+    print("Do you want to roll the dice? (y/n)")
+    while True:
+        choice = input().lower()
+        if choice == 'y':
+            # Perform a dice roll (random 1-6)
+            result = random.randint(1, 6)
+
+            # Display the result of the dice roll
+            print(f"Your rolled: {result}")
+
+            # Determine which row to print based on the dice roll result
+            if result in [1, 2]:
+                row = diceroll_sheet.row_values(1)
+            elif result in [3, 4]:
+                row = diceroll_sheet.row_values(2)
+            elif result in [5, 6]:
+                row = diceroll_sheet.row_values(3)
+
+            # Print the corresponding row
+            for cell_value in row:
+                print(YELLOW + cell_value + END_COLOR)
+                break
+            return
+        elif choice == 'n':
+            print("You chose not to roll the dice. Ending the game.")
+            return False
+        else:
+            print("Invalid choice. Please enter 'y' to roll or 'n' to end the game.")
+
+    
+
 def main():
-    # add function to check if story is ongoing and if, choose to reset or continue.
     set_player()
     while True:
         storyline = get_story()
-        #print(storyline)
         print(YELLOW + storyline + END_COLOR)
+        
+        # Check if the storyline ends with "Dice roll!"
+        if storyline.endswith("Dice roll:"):
+            dice_roll()  # Call the dice_roll function
+
         if not ask_to_continue():
             choice = reset_or_save()
             if choice == 'reset':
@@ -185,7 +227,6 @@ def main():
             elif choice == 'save':
                 break  # Exit the game loop
     print("Game saved. Goodbye!")
-
 
 if __name__ == '__main__':
     main()
