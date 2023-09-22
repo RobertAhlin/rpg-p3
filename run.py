@@ -36,15 +36,25 @@ def set_player():
     # Check for a character name written with letters and max 20 long.
     while True:
         char_name = input("Enter a character name:\n")
+
+        # Open the "player" sheet
+        player_sheet = SHEET.worksheet('player')
+        existing_char_name = player_sheet.acell('B2').value.strip()  # Get the existing character name and remove leading/trailing spaces
         
+        if char_name == existing_char_name:
+            print("Character already exist. Continuing the story...")
+            return False
+        else:
+            print("New character in progress..")
+
         if char_name.isalpha() and len(char_name) <= 20:
             char_name = char_name.capitalize()  # Make the first letter uppercase, if not.
             break
         else:
             print("Character name must contain only letters and be a maximum of 20 characters.")
-    
+
     print("\nYou will now create stats for your character.")
-    print("You have a total of 12 Character Points (CP) to distribute over Stamina, Strength, and Charisma.")
+    print("You have a total of 12 Character Points (CP) to distribute over Strength, Stamina, and Charisma.")
 
     cp = 12
 
@@ -70,7 +80,7 @@ def set_player():
 
     # Shoow valid values for char_str, char_sta, and char_cha to player
     print(f"Welcome to the world {char_name}! Your stats are:")
-    print(f"Strength: {char_str}\nStamina: {char_sta}\nCharisma: {char_cha}")
+    print(f"Strength: {char_str}\nStamina: {char_sta}\nCharisma: {char_cha}\nGame starting...")
 
     # Open the "player" sheet
     player_sheet = SHEET.worksheet('player')
@@ -170,7 +180,7 @@ def end_now():
                 exit()
             break  # Exit the game loop
 
-def dice_roll():
+def dice_roll_fight():
     """
     Perform a dice roll and display the result.
     Then, depending on the result, print the corresponding row from the 'diceroll' sheet.
@@ -186,16 +196,15 @@ def dice_roll():
 
             # Get character stat from sheet.
             player_sheet = SHEET.worksheet('player')
-            new_char_str_value = player_sheet.acell('D2').value
+            new_char_str_value = player_sheet.acell('C2').value
 
             # Check if the value is not None
             if new_char_str_value is not None:
                 try:
                     # Convert new_char_str_value to an integer
                     new_char_str = int(new_char_str_value)
-                    print(new_char_str)
                 except ValueError:
-                    print("Error: The value in cell D4 is not a valid integer.")
+                    print("Error: The value in cell C2 is not a valid integer.")
             else:
                 print("Error: The value in cell D4 is None.")
 
@@ -203,17 +212,17 @@ def dice_roll():
             result = (dice_value + new_char_str) / 2
 
             # Display the result of the dice roll
-            print(f"Your rolled: {dice_value}")
+            print(BLUE + f"With a roll of the dice combined with your strength, you invoke a surge\nof luck and chance. The dice dance through the air,\nand as they land, they reveal their outcome: {dice_value}" + END_COLOR)
 
             # Display result 
-            print(f"Your dice roll combined with your strength gives {result}")
+            print(BLUE + f" Your dice roll combined with your strength gives your power of {result}" + END_COLOR)
 
             # Determine which row to print based on the dice roll result
-            if 1 <= average_result <= 3:
+            if 1 <= result <= 3:
                 row = diceroll_sheet.row_values(1)
-            elif 4 <= average_result <= 6:
+            elif 4 <= result <= 6:
                 row = diceroll_sheet.row_values(2)
-            elif 7 <= average_result <= 9:
+            elif 7 <= result <= 9:
                 row = diceroll_sheet.row_values(3)
 
             # Print the corresponding row
@@ -233,20 +242,22 @@ def main():
     set_player()
     while True:
         storyline = get_story()
-        print(YELLOW + storyline + END_COLOR)
-        
-        # Check if the storyline ends with "Dice roll!"
-        if storyline.endswith("Dice roll:"):
-            dice_roll()  # Call the dice_roll function
+        if storyline is not None:
+            print(YELLOW + storyline + END_COLOR)
+            
+            # Check if the storyline ends with "a gift from the mischievous Forest Oracle."
+            dice_roll_fight() if storyline.endswith("a gift from the mischievous Forest Oracle.") else None
 
-        if not ask_to_continue():
-            choice = reset_or_save()
-            if choice == 'reset':
-                reset_story()
-                break  # Exit the game loop
-            elif choice == 'save':
-                break  # Exit the game loop
-    print("Game saved. Goodbye!")
+            if not ask_to_continue():
+                choice = reset_or_save()
+                if choice == 'reset':
+                    reset_story()
+                    break  # Exit the game loop
+                elif choice == 'save':
+                    break  # Exit the game loop
+        else:
+            break  # Exit the game loop
+    print("Thank you for playing. Goodbye!")
 
 if __name__ == '__main__':
     main()
