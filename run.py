@@ -28,14 +28,14 @@ def set_player():
     print("Please enter your name.")
     print("Just one name with one word.")
 
-    player_name = input("Enter your name: ")
+    player_name = input("Enter your name:\n")
     print(f"Welcome to the game {player_name}.")
 
     print("You will now create you character.")
 
     # Check for a character name written with letters and max 20 long.
     while True:
-        char_name = input("Enter a character name: ")
+        char_name = input("Enter a character name:\n")
         
         if char_name.isalpha() and len(char_name) <= 20:
             char_name = char_name.capitalize()  # Make the first letter uppercase, if not.
@@ -56,9 +56,9 @@ def set_player():
     while True:
         try:
             # Ask for input for each stat
-            char_str = int(input("Strength: "))
-            char_sta = int(input("Stamina: "))
-            char_cha = int(input("Charisma: "))
+            char_str = int(input("Strength:\n"))
+            char_sta = int(input("Stamina:\n"))
+            char_cha = int(input("Charisma:\n"))
 
             # Check if the sum of the entered stats is less than or equal to "cp"
             if char_str + char_sta + char_cha <= cp:
@@ -122,7 +122,7 @@ def ask_to_continue():
     Returns True to continue or False to quit.
     """
     while True:
-        choice = input("Do you want to continue (y) or quit (n)? ").lower()
+        choice = input("Do you want to continue (y) or quit (n)?\n").lower()
         if choice == 'y':
             return True
         elif choice == 'n':
@@ -136,7 +136,7 @@ def reset_or_save():
     Returns 'reset' to reset the story or 'save' to save and quit.
     """
     while True:
-        choice = input("Do you want to reset the story (r) or save and quit (s)? ").lower()
+        choice = input("Do you want to reset the story (r) or save and quit (s)?\n").lower()
         if choice == 'r':
             return 'reset'
         elif choice == 's':
@@ -180,7 +180,7 @@ def dice_roll():
 
     print("Do you want to roll the dice? (y/n)")
     while True:
-        choice = input().lower()
+        choice = input("y/n:\n").lower()
         if choice == 'y':
             # Perform a dice roll (random 1-6)
             result = random.randint(1, 6)
