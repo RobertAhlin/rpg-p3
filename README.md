@@ -30,11 +30,9 @@ Rock, Paper, Scissors - The Game is constructed to show the use of my knowledge 
 
 <img src="readmefiles/amiresponsive.jpg" alt="Website shown in different devices."><br>
 
-The live link can be found here - <a href="https://robertahlin.github.io/rps-project2b/" target="_blank">https://robertahlin.github.io/rps-project2b/</a>
+The live link to Heroku can be found here - <a href="https://rpg-p3-40e9a3ed28c2.herokuapp.com/" target="_blank">https://rpg-p3-40e9a3ed28c2.herokuapp.com/</a>
 
-The site is developed to be responsive for different devices.
-
-The idea for this project it to make a playable game against the computer. But first there is a landing page that will show a hero image for the game and it will also contain instructions on how to play the game. And as every gamer always want to win, there are an option to enter cheat code.
+The idea for this project it to make a playable textbased role playing game with a realy humorous twist. 
 
 Use "godmode" as code to try it out. (Without the "".)
 
@@ -207,9 +205,7 @@ The site was deployed to Heroku. Using the Code institute guidence from Love San
 <ul>
 <li>For this project I want to credit the Google search engine. It's hard to remember how to write all codes.</li>
 <li>A lot of help comes from search hits at the "stack overflow" forums.</li>
-<li>Some CSS style code from my previous project <a href="https://robertahlin.github.io/motocross-in-action/" target="_blank">Motocross in action</a>.</li>
-<li>Hand images of rock, paper and scissors from: <a href="https://www.pngaaa.com/detail/3313784" target="_blank">https://www.pngaaa.com/detail/3313784</a></li>
-<li>Image of explosion from <a href="https://www.vecteezy.com/png/9374808-fire-explode-png-design">https://www.vecteezy.com/png/9374808-fire-explode-png-design</a></li>
+<li>The game story written by ChatGPT with my instructions.
 </ul>
 
 ### <a id="acknowledgements"></a>Acknowledgements

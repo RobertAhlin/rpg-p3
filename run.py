@@ -178,22 +178,42 @@ def dice_roll():
     # Get the 'diceroll' sheet
     diceroll_sheet = SHEET.worksheet('diceroll')
 
-    print("Do you want to roll the dice?")
     while True:
-        choice = input("y/n:\n").lower()
+        choice = input("Do you want to roll the dice? (y/n):\n").lower()
         if choice == 'y':
             # Perform a dice roll (random 1-6)
-            result = random.randint(1, 6)
+            dice_value = random.randint(1, 6)
+
+            # Get character stat from sheet.
+            player_sheet = SHEET.worksheet('player')
+            new_char_str_value = player_sheet.acell('D2').value
+
+            # Check if the value is not None
+            if new_char_str_value is not None:
+                try:
+                    # Convert new_char_str_value to an integer
+                    new_char_str = int(new_char_str_value)
+                    print(new_char_str)
+                except ValueError:
+                    print("Error: The value in cell D4 is not a valid integer.")
+            else:
+                print("Error: The value in cell D4 is None.")
+
+            # Add value from strength and count for average
+            result = (dice_value + new_char_str) / 2
 
             # Display the result of the dice roll
-            print(f"Your rolled: {result}")
+            print(f"Your rolled: {dice_value}")
+
+            # Display result 
+            print(f"Your dice roll combined with your strength gives {result}")
 
             # Determine which row to print based on the dice roll result
-            if result in [1, 2]:
+            if 1 <= average_result <= 3:
                 row = diceroll_sheet.row_values(1)
-            elif result in [3, 4]:
+            elif 4 <= average_result <= 6:
                 row = diceroll_sheet.row_values(2)
-            elif result in [5, 6]:
+            elif 7 <= average_result <= 9:
                 row = diceroll_sheet.row_values(3)
 
             # Print the corresponding row
