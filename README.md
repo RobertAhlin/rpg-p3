@@ -181,15 +181,26 @@ Also, my mentor has tried the website.
 
 ## <a id="deployment"></a>Deployment
 
-<ul>
-<li>The site was deployed to Heroku. Using the Code institute guidence from Love Sandwiches walkthrough.</li>
+
+The site was deployed to Heroku. Using the Code institute guidence from Love Sandwiches walkthrough.
 <ul>
 <li>I used the GitHub template to create my own repository.</li>
 <li>Used Codeanywhere as IDE.</li>
 <li>Made a Google sheet and set up the API acording to the videos in the Love Sandwiches walkthrough.</li>
-<li></li>
+<li>I deployed the project to Heroku goint through these steps.</li>
+    <ol>
+    <li>Create new app</li>
+    <li>Named it: rpg-p3 (Short for Role Playing Game - Project 3)</li>
+    <li>Choosed Europe as region</li>
+    <li>I went to the Settings tab to create config vars for CREDS and PORT</li>
+    <li>I added the buildpacks Python and Nodejs</li>
+    <li>In the Deploy tab I connected to GitHub repository "rpg-p3"</li>
+    <li>I manually deployed branch (main)</li>
+    <li></li>
+    <li></li>
+    </ol>
 </ul>
-</ul>
+
 
 ## <a id="credits"></a>Credits
 

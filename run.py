@@ -178,7 +178,7 @@ def dice_roll():
     # Get the 'diceroll' sheet
     diceroll_sheet = SHEET.worksheet('diceroll')
 
-    print("Do you want to roll the dice? (y/n)")
+    print("Do you want to roll the dice?")
     while True:
         choice = input("y/n:\n").lower()
         if choice == 'y':
