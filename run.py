@@ -6,7 +6,7 @@ SCOPE = [
     "https://www.googleapis.com/auth/spreadsheets",
     "https://www.googleapis.com/auth/drive.file",
     "https://www.googleapis.com/auth/drive"
-    ]
+]
 
 # ANSI color codes
 RED = '\033[91m'
@@ -19,6 +19,42 @@ CREDS = Credentials.from_service_account_file('creds.json')
 SCOPED_CREDS = CREDS.with_scopes(SCOPE)
 GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open('rpg_p3')
+
+def roll_dice_and_display(char_stat, message):
+    """
+    Perform a dice roll and display the result.
+    """
+    while True:
+        choice = input("Do you want to roll the dice? (y/n):\n").lower()
+        if choice == 'y':
+            # Perform a dice roll (random 1-6)
+            dice_value = random.randint(1, 6)
+
+            # Check if the character stat value is not None
+            if char_stat is not None:
+                try:
+                    # Convert the character stat value to an integer
+                    char_stat_value = int(char_stat)
+                except ValueError:
+                    print(f"Error: The value is not a valid integer: {char_stat}")
+                    return False
+            else:
+                print("Error: The value is None.")
+                return False
+
+            # Calculate the result
+            result = (dice_value + char_stat_value) / 2
+
+            # Display the result of the dice roll
+            print(BLUE + f"{message} {dice_value}" + END_COLOR)
+            print(BLUE + f"Your dice roll combined with your character's stat gives you the power of {result}" + END_COLOR)
+
+            return result
+        elif choice == 'n':
+            print("You chose not to roll the dice. Ending the game.")
+            return False
+        else:
+            print("Invalid choice. Please enter 'y' to roll or 'n' to end the game.")
 
 def set_player():
     """
@@ -85,8 +121,8 @@ def set_player():
     # Open the "player" sheet
     player_sheet = SHEET.worksheet('player')
     
-    #character_data = [player_name, char_name, char_str, char_sta, char_cha]
-    #player_sheet.update("A2:E2", [character_data])
+    # character_data = [player_name, char_name, char_str, char_sta, char_cha]
+    # player_sheet.update("A2:E2", [character_data])
     player_sheet.update_acell('A2', player_name)
     player_sheet.update_acell('B2', char_name)
     player_sheet.update_acell('C2', char_str)
@@ -153,7 +189,7 @@ def reset_story():
         if value == 'x':
             story_sheet.update_cell(i + 1, 1, '')
 
-    print("Story completely resetted.")
+    print("Story completely reset.")
 
 def end_now():
     while True:
@@ -164,134 +200,63 @@ def end_now():
             if choice == 'reset':
                 # Reset the story (remove 'x' from column A)
                 reset_story()
+                break  # Exit the game loop
             elif choice == 'save':
-                # Save and quit the game
-                exit()
-            break  # Exit the game loop
+                break  # Exit the game loop
 
 def dice_roll_fight():
     """
     Perform a dice roll and display the result.
     Then, depending on the result, print the corresponding row from the 'diceroll' sheet.
     """
-    # Get the 'diceroll' sheet
-    diceroll_sheet = SHEET.worksheet('diceroll')
+    char_str_value = SHEET.worksheet('player').acell('C2').value
+    message = "With a roll of the dice combined with your strength, you invoke a surge\nof luck and chance. The dice dance through the air,\nand as they land, they reveal their outcome:"
+    result = roll_dice_and_display(char_str_value, message)
+    
+    if result is not False:
+        # Get the 'diceroll' sheet
+        diceroll_sheet = SHEET.worksheet('diceroll')
+        
+        # Determine which row to print based on the dice roll result
+        if 1 <= result <= 3:
+            row = diceroll_sheet.row_values(2)
+        elif 4 <= result <= 6:
+            row = diceroll_sheet.row_values(3)
+        elif 7 <= result <= 9:
+            row = diceroll_sheet.row_values(4)
 
-    while True:
-        choice = input("Do you want to roll the dice? (y/n):\n").lower()
-        if choice == 'y':
-            # Perform a dice roll (random 1-6)
-            dice_value = random.randint(1, 6)
-
-            # Get character stat from sheet.
-            player_sheet = SHEET.worksheet('player')
-            new_char_str_value = player_sheet.acell('C2').value
-
-            # Check if the value is not None
-            if new_char_str_value is not None:
-                try:
-                    # Convert new_char_str_value to an integer
-                    new_char_str = int(new_char_str_value)
-                except ValueError:
-                    print("Error: The value in cell C2 is not a valid integer.")
-            else:
-                print("Error: The value in cell C2 is None.")
-
-            # Add value from strength and count for average
-            result = (dice_value + new_char_str) / 2
-
-            # Display the result of the dice roll
-            print(BLUE + f"With a roll of the dice combined with your strength, you invoke a surge\nof luck and chance. The dice dance through the air,\nand as they land, they reveal their outcome: {dice_value}" + END_COLOR)
-
-            # Display result 
-            print(BLUE + f"- Your dice roll combined with your strength gives you the power of {result}" + END_COLOR)
-
-            # Determine which row to print based on the dice roll result
-            if 1 <= result <= 3:
-                row = diceroll_sheet.row_values(2)
-            elif 4 <= result <= 6:
-                row = diceroll_sheet.row_values(3)
-            elif 7 <= result <= 9:
-                row = diceroll_sheet.row_values(4)
-
-            # Print the corresponding row
-            for cell_value in row:
-                print(YELLOW + cell_value + END_COLOR)
-                break
-            return
-        elif choice == 'n':
-            print("You chose not to roll the dice. Ending the game.")
-            return False
-        else:
-            print("Invalid choice. Please enter 'y' to roll or 'n' to end the game.")
+        # Print the corresponding row
+        for cell_value in row:
+            print(YELLOW + cell_value + END_COLOR)
+            break
 
 def dice_roll_journey():
     """
     Perform a dice roll and display the result.
     Then, depending on the result of the dice roll combined with
-    strenght and stamina, print the corresponding row from the 'diceroll' sheet.
+    strength and stamina, print the corresponding row from the 'diceroll' sheet.
     """
-    # Get the 'diceroll' sheet
-    diceroll_sheet = SHEET.worksheet('diceroll')
+    char_str_value = SHEET.worksheet('player').acell('C2').value
+    char_sta_value = SHEET.worksheet('player').acell('D2').value
+    message = "With a roll of the dice combined with your strength, you invoke a surge\nof luck and chance. The dice dance through the air,\nand as they land, they reveal their outcome:"
+    result = roll_dice_and_display(char_str_value, message)
 
-    while True:
-        choice = input("Do you want to roll the dice? (y/n):\n").lower()
-        if choice == 'y':
-            # Perform a dice roll (random 1-6)
-            dice_value = random.randint(1, 6)
+    if result is not False:
+        # Get the 'diceroll' sheet
+        diceroll_sheet = SHEET.worksheet('diceroll')
 
-            # Get character stat from sheet.
-            player_sheet = SHEET.worksheet('player')
-            new_char_str_value = player_sheet.acell('C2').value
-            new_char_sta_value = player_sheet.acell('D2').value
+        # Determine which row to print based on the dice roll result
+        if 1 <= result <= 3:
+            row = diceroll_sheet.row_values(6)
+        elif 4 <= result <= 6:
+            row = diceroll_sheet.row_values(7)
+        elif 7 <= result <= 9:
+            row = diceroll_sheet.row_values(8)
 
-            # Check if the Strength value is not None
-            if new_char_str_value is not None:
-                try:
-                    # Convert new_char_str_value to an integer
-                    new_char_str = int(new_char_str_value)
-                except ValueError:
-                    print("Error: The value in cell C2 is not a valid integer.")
-            else:
-                print("Error: The value in cell C2 is None.")
-
-            # Check if the Stamina value is not None
-            if new_char_sta_value is not None:
-                try:
-                    # Convert new_char_str_value to an integer
-                    new_char_sta = int(new_char_sta_value)
-                except ValueError:
-                    print("Error: The value in cell D2 is not a valid integer.")
-            else:
-                print("Error: The value in cell D2 is None.")
-
-            # Add value from strength and count for average
-            result = (dice_value + new_char_str + new_char_sta) / 2
-
-            # Display the result of the dice roll
-            print(BLUE + f"With a roll of the dice combined with your strength, you invoke a surge\nof luck and chance. The dice dance through the air,\nand as they land, they reveal their outcome: {dice_value}" + END_COLOR)
-
-            # Display result 
-            print(BLUE + f"- Your dice roll combined with your strength and stamina gives you the power of {result}" + END_COLOR)
-
-            # Determine which row to print based on the dice roll result
-            if 1 <= result <= 3:
-                row = diceroll_sheet.row_values(6)
-            elif 4 <= result <= 6:
-                row = diceroll_sheet.row_values(7)
-            elif 7 <= result <= 9:
-                row = diceroll_sheet.row_values(8)
-
-            # Print the corresponding row
-            for cell_value in row:
-                print(YELLOW + cell_value + END_COLOR)
-                break
-            return
-        elif choice == 'n':
-            print("You chose not to roll the dice. Ending the game.")
-            return False
-        else:
-            print("Invalid choice. Please enter 'y' to roll or 'n' to end the game.")    
+        # Print the corresponding row
+        for cell_value in row:
+            print(YELLOW + cell_value + END_COLOR)
+            break
 
 def dice_roll_meeting():
     """
@@ -299,56 +264,26 @@ def dice_roll_meeting():
     Then, depending on the result of the dice roll combined with charisma,
     print the corresponding row from the 'diceroll' sheet.
     """
-    # Get the 'diceroll' sheet
-    diceroll_sheet = SHEET.worksheet('diceroll')
+    char_cha_value = SHEET.worksheet('player').acell('E2').value
+    message = "With a roll of the dice combined with your charisma, you invoke a surge\nof luck and chance. The dice dance through the air,\nand as they land, they reveal their outcome:"
+    result = roll_dice_and_display(char_cha_value, message)
 
-    while True:
-        choice = input("Do you want to roll the dice? (y/n):\n").lower()
-        if choice == 'y':
-            # Perform a dice roll (random 1-6)
-            dice_value = random.randint(1, 6)
+    if result is not False:
+        # Get the 'diceroll' sheet
+        diceroll_sheet = SHEET.worksheet('diceroll')
 
-            # Get character stat from sheet.
-            player_sheet = SHEET.worksheet('player')
-            new_char_cha_value = player_sheet.acell('E2').value
+        # Determine which row to print based on the dice roll result
+        if 1 <= result <= 4:
+            row = diceroll_sheet.row_values(10)
+        elif 5 <= result <= 11:
+            row = diceroll_sheet.row_values(11)
+        elif result <= 12:
+            row = diceroll_sheet.row_values(12)
 
-            # Check if the Strength value is not None
-            if new_char_cha_value is not None:
-                try:
-                    # Convert new_char_str_value to an integer
-                    new_char_cha = int(new_char_cha_value)
-                except ValueError:
-                    print("Error: The value in cell E2 is not a valid integer.")
-            else:
-                print("Error: The value in cell E2 is None.")
-
-            # Add value from strength and count for average
-            result = (dice_value + new_char_cha)
-
-            # Display the result of the dice roll
-            print(BLUE + f"With a roll of the dice combined with your cahrisma, you invoke a surge\nof luck and chance. The dice dance through the air,\nand as they land, they reveal their outcome: {dice_value}" + END_COLOR)
-
-            # Display result 
-            print(BLUE + f"- Your dice roll combined with your strength and stamina gives you the power of {result}" + END_COLOR)
-
-            # Determine which row to print based on the dice roll result
-            if 1 <= result <= 4:
-                row = diceroll_sheet.row_values(10)
-            elif 5 <= result <= 11:
-                row = diceroll_sheet.row_values(11)
-            elif result <= 12:
-                row = diceroll_sheet.row_values(12)
-
-            # Print the corresponding row
-            for cell_value in row:
-                print(YELLOW + cell_value + END_COLOR)
-                break
-            return
-        elif choice == 'n':
-            print("You chose not to roll the dice. Ending the game.")
-            return False
-        else:
-            print("Invalid choice. Please enter 'y' to roll or 'n' to end the game.")
+        # Print the corresponding row
+        for cell_value in row:
+            print(YELLOW + cell_value + END_COLOR)
+            break
 
 def main():
     set_player()
@@ -356,7 +291,7 @@ def main():
         storyline = get_story()
         if storyline is not None:
             print(YELLOW + storyline + END_COLOR)
-            
+
             # Check if the storyline ends with "a gift from the mischievous Forest Oracle."
             dice_roll_fight() if storyline.endswith("a gift from the mischievous Forest Oracle.") else None
 
@@ -369,6 +304,7 @@ def main():
             if not ask_to_continue():
                 choice = reset_or_save()
                 if choice == 'reset':
+                    # Reset the story (remove 'x' from column A)
                     reset_story()
                     break  # Exit the game loop
                 elif choice == 'save':
