@@ -82,7 +82,7 @@ def set_player():
             return False
         else:
             print("New character in progress..")
-
+            reset_story() # Reset story for a new character.
         if char_name.isalpha() and len(char_name) <= 20:
             char_name = char_name.capitalize()  # Make the first letter uppercase, if not.
             break
@@ -273,11 +273,11 @@ def dice_roll_meeting():
         diceroll_sheet = SHEET.worksheet('diceroll')
 
         # Determine which row to print based on the dice roll result
-        if 1 <= result <= 4:
+        if 1 <= result <= 3:
             row = diceroll_sheet.row_values(10)
-        elif 5 <= result <= 11:
+        elif 4 <= result <= 6:
             row = diceroll_sheet.row_values(11)
-        elif result <= 12:
+        elif 7 <= result <= 9:
             row = diceroll_sheet.row_values(12)
 
         # Print the corresponding row
