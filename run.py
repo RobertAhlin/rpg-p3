@@ -93,17 +93,6 @@ def set_player():
     player_sheet.update_acell('D2', char_sta)
     player_sheet.update_acell('E2', char_cha)
 
-def roll_t10_dice():
-    """
-    Simulate rolling a ten-sided dice.
-    Returns a random integer between 1 and 10.
-    """
-    return random.randint(1, 10)
-
-    # Example usage:
-    result = roll_t10_dice()
-    print(f"You rolled a {result}")
-
 def get_story():
     """
     Get one value from the 'story' sheet in your Google Sheet.
@@ -132,13 +121,13 @@ def ask_to_continue():
     Returns True to continue or False to quit.
     """
     while True:
-        choice = input("Do you want to continue (y) or quit (n)?\n").lower()
-        if choice == 'y':
+        choice = input("Do you want to continue (c) or quit (q)?\n").lower()
+        if choice == 'c':
             return True
-        elif choice == 'n':
+        elif choice == 'q':
             return False
         else:
-            print("Invalid choice. Please enter 'y' to continue or 'n' to quit.")
+            print("Invalid choice. Please enter 'C' to continue or 'q' to quit.")
 
 def reset_or_save():
     """
