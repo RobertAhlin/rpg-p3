@@ -127,7 +127,7 @@ def ask_to_continue():
         elif choice == 'q':
             return False
         else:
-            print("Invalid choice. Please enter 'C' to continue or 'q' to quit.")
+            print("Invalid choice. Please enter 'c' to continue or 'q' to quit.")
 
 def reset_or_save():
     """
@@ -204,7 +204,7 @@ def dice_roll_fight():
             print(BLUE + f"With a roll of the dice combined with your strength, you invoke a surge\nof luck and chance. The dice dance through the air,\nand as they land, they reveal their outcome: {dice_value}" + END_COLOR)
 
             # Display result 
-            print(BLUE + f" Your dice roll combined with your strength gives you the power of {result}" + END_COLOR)
+            print(BLUE + f"- Your dice roll combined with your strength gives you the power of {result}" + END_COLOR)
 
             # Determine which row to print based on the dice roll result
             if 1 <= result <= 3:
@@ -272,7 +272,7 @@ def dice_roll_journey():
             print(BLUE + f"With a roll of the dice combined with your strength, you invoke a surge\nof luck and chance. The dice dance through the air,\nand as they land, they reveal their outcome: {dice_value}" + END_COLOR)
 
             # Display result 
-            print(BLUE + f" Your dice roll combined with your strength and stamina gives you the power of {result}" + END_COLOR)
+            print(BLUE + f"- Your dice roll combined with your strength and stamina gives you the power of {result}" + END_COLOR)
 
             # Determine which row to print based on the dice roll result
             if 1 <= result <= 3:
@@ -316,7 +316,7 @@ def dice_roll_meeting():
             if new_char_cha_value is not None:
                 try:
                     # Convert new_char_str_value to an integer
-                    new_char_str = int(new_char_cha_value)
+                    new_char_cha = int(new_char_cha_value)
                 except ValueError:
                     print("Error: The value in cell E2 is not a valid integer.")
             else:
@@ -329,7 +329,7 @@ def dice_roll_meeting():
             print(BLUE + f"With a roll of the dice combined with your cahrisma, you invoke a surge\nof luck and chance. The dice dance through the air,\nand as they land, they reveal their outcome: {dice_value}" + END_COLOR)
 
             # Display result 
-            print(BLUE + f" Your dice roll combined with your strength and stamina gives you the power of {result}" + END_COLOR)
+            print(BLUE + f"- Your dice roll combined with your strength and stamina gives you the power of {result}" + END_COLOR)
 
             # Determine which row to print based on the dice roll result
             if 1 <= result <= 4:
