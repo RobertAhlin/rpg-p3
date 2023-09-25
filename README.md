@@ -1,12 +1,12 @@
-# <a id="the-game"></a>Rock, Paper, Scissors - The Game
+# <a id="the-game"></a>RPG - Text (console) based role playing game.
 
 ## Second project at Code Institute
 
-Rock, Paper, Scissors - The Game is constructed to show the use of my knowledge with JavaScript. Together with my skills in HTML and CSS. This is a good old classic game called Rock, Paper, Scissors. The basics is to use one of the elements in order to beat another. Where Rock always beat Scissors, Scissors always beat Paper, and Paper always beat Rock. In this game. A user can choose one of the options to play against the computer (the Robot). The Robot's choice is random using "Math.random()" in JavaScript.
+Text
 
 # <a id="table-of-content"></a>Table of Content
 
-- <a href="#the-game">Rock, Paper, Scissors - The Game</a>
+- <a href="#the-game">RPG - Text (console) based role playing game.</a>
 - <a href="#table-of-content">Table of Content</a>
 - <a href="#demo">Demo</a>
 - <a href="#user-experience">User Experience</a>
@@ -34,11 +34,9 @@ The live link to Heroku can be found here - <a href="https://rpg-p3-40e9a3ed28c2
 
 The idea for this project it to make a playable textbased role playing game with a realy humorous twist. 
 
-Use "godmode" as code to try it out. (Without the "".)
-
 # <a id="user-experience"></a>User Experience
 
-The user of this website should be able to try out the concept of playing Rock, Paper, Scissors and practice it against a robot. The game here is just based on luck.
+The user of this website...
 
 ## <a id="user-stories"></a>User stories
 
