@@ -218,7 +218,7 @@ def dice_roll_fight():
         diceroll_sheet = SHEET.worksheet('diceroll')
         
         # Determine which row to print based on the dice roll result
-        if 1 <= result <= 3:
+        if 0 <= result <= 3:
             row = diceroll_sheet.row_values(2)
         elif 4 <= result <= 6:
             row = diceroll_sheet.row_values(3)
@@ -273,7 +273,7 @@ def dice_roll_meeting():
         diceroll_sheet = SHEET.worksheet('diceroll')
 
         # Determine which row to print based on the dice roll result
-        if 1 <= result <= 3:
+        if 0 <= result <= 3:
             row = diceroll_sheet.row_values(10)
         elif 4 <= result <= 6:
             row = diceroll_sheet.row_values(11)
