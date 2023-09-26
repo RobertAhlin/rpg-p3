@@ -309,27 +309,33 @@ def dice_roll_meeting():
 
 def main():
     set_player()
+    trigger = 1
     while True:
         storyline = get_story()
-        first_roll_triggered = False
-        second_roll_triggered = False
 
         if storyline is not None:
             print(YELLOW + storyline + END_COLOR)
 
             # Check if the storyline says it's time to roll dice.
-            if storyline.endswith("Time to roll your dice:") and not first_roll_triggered:
+            if storyline.endswith("Time to roll your dice:") and trigger == 1:
+                print(f"Trigger: {trigger}")
                 dice_roll_fight()
-                first_roll_triggered = True
+                trigger = 2
+                print(f"Trigger set to 2")
 
             # Check if the storyline says it's time to roll dice.
-            elif storyline.endswith("Time to roll your dice:") and not second_roll_triggered:
+            elif storyline.endswith("Time to roll your dice:") and trigger == 2:
+                print(f"Trigger: {trigger}")
                 dice_roll_journey()
-                second_roll_triggered = True
+                trigger = 3
+                print(f"Trigger set to 3")
 
             # Check if the storyline says it's time to roll dice.
-            elif storyline.endswith("Time to roll your dice:") and not (first_condition_triggered and second_condition_triggered):
+            elif storyline.endswith("Time to roll your dice:") and trigger == 3:
+                print(f"Trigger: {trigger}")
                 dice_roll_meeting()
+                trigger = 1
+                print(f"Trigger reset to 1")
             
 
             if not ask_to_continue():
@@ -341,7 +347,9 @@ def main():
                 elif choice == 'save':
                     break  # Exit the game loop
         else:
+            reset_story()
             break  # Exit the game loop
+
     print(f"Thank you for playing. Goodbye!\n")
     print(RED + f"Rebooting game...\n" + END_COLOR)
 
