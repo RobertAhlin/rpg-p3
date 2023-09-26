@@ -25,7 +25,7 @@ try:
     SHEET = GSPREAD_CLIENT.open('rpg_p3')
 except (Exception, SpreadsheetNotFound) as e:
     if isinstance(e, SpreadsheetNotFound):
-        print("The 'rpg_p3' Google Sheet was not found. Please make sure it exists.")
+        print("The 'rpg_p3' Google Sheet not found. Please make sure it exists.")
     else:
         print(f"Sorry, there was an error authorizing Google Sheets API: {e}")
     exit(1)
@@ -130,6 +130,7 @@ def get_story():
             return row[1]
 
     return None  # Return None if all rows have been collected
+
 def roll_dice_and_display(char_stat, message):
     """
     Perform a dice roll and display the result.
@@ -232,6 +233,8 @@ def dice_roll_fight():
     message = "With a roll of the dice combined with your strength, you invoke a surge\nof luck and chance. The dice dance through the air,\nand as they land, they reveal their outcome:"
     result = roll_dice_and_display(char_str_value, message)
     
+    row = []  # Initialize row
+
     if result is not False:
         # Get the 'diceroll' sheet
         diceroll_sheet = SHEET.worksheet('diceroll')
@@ -308,17 +311,26 @@ def main():
     set_player()
     while True:
         storyline = get_story()
+        first_roll_triggered = False
+        second_roll_triggered = False
+
         if storyline is not None:
             print(YELLOW + storyline + END_COLOR)
 
-            # Check if the storyline ends with "a gift from the mischievous Forest Oracle."
-            dice_roll_fight() if storyline.endswith("a gift from the mischievous Forest Oracle.") else None
+            # Check if the storyline says it's time to roll dice.
+            if storyline.endswith("Time to roll your dice:") and not first_roll_triggered:
+                dice_roll_fight()
+                first_roll_triggered = True
 
-            # Check if the storyline ends with "With a roll of the dice, you determine your fate."
-            dice_roll_journey() if storyline.endswith("With a roll of the dice, you determine your fate.") else None
+            # Check if the storyline says it's time to roll dice.
+            elif storyline.endswith("Time to roll your dice:") and not second_roll_triggered:
+                dice_roll_journey()
+                second_roll_triggered = True
 
-            # Check if the storyline ends with "with every word and gesture."
-            dice_roll_meeting() if storyline.endswith("with every word and gesture.") else None
+            # Check if the storyline says it's time to roll dice.
+            elif storyline.endswith("Time to roll your dice:") and not (first_condition_triggered and second_condition_triggered):
+                dice_roll_meeting()
+            
 
             if not ask_to_continue():
                 choice = reset_or_save()
