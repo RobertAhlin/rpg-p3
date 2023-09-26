@@ -2,6 +2,8 @@ import gspread
 from google.oauth2.service_account import Credentials
 import random
 from gspread.exceptions import SpreadsheetNotFound
+import os
+import sys
 
 SCOPE = [
     "https://www.googleapis.com/auth/spreadsheets",
@@ -206,6 +208,7 @@ def reset_story():
     player_sheet.delete_rows(2)
 
     print("Story resetted.")
+    
 
 def end_now():
     while True:
@@ -327,7 +330,12 @@ def main():
                     break  # Exit the game loop
         else:
             break  # Exit the game loop
-    print(f"Thank you for playing. Goodbye!")
+    print(f"Thank you for playing. Goodbye!\n")
+    print(RED + f"Rebooting game...\n" + END_COLOR)
+
+    # Restart game
+    python = sys.executable
+    os.execl(python, python, *sys.argv)
 
 if __name__ == '__main__':
     main()
