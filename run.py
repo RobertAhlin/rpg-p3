@@ -1,6 +1,7 @@
 import gspread
 from google.oauth2.service_account import Credentials
 import random
+from gspread.exceptions import SpreadsheetNotFound
 
 SCOPE = [
     "https://www.googleapis.com/auth/spreadsheets",
@@ -17,44 +18,17 @@ END_COLOR = '\033[0m'  # Reset color to default
 
 CREDS = Credentials.from_service_account_file('creds.json')
 SCOPED_CREDS = CREDS.with_scopes(SCOPE)
-GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
-SHEET = GSPREAD_CLIENT.open('rpg_p3')
+try:
+    GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
+    SHEET = GSPREAD_CLIENT.open('rpg_p3')
+except (Exception, SpreadsheetNotFound) as e:
+    if isinstance(e, SpreadsheetNotFound):
+        print("The 'rpg_p3' Google Sheet was not found. Please make sure it exists.")
+    else:
+        print(f"Sorry, there was an error authorizing Google Sheets API: {e}")
+    exit(1)
 
-def roll_dice_and_display(char_stat, message):
-    """
-    Perform a dice roll and display the result.
-    """
-    while True:
-        choice = input("Do you want to roll the dice? (y/n):\n").lower()
-        if choice == 'y':
-            # Perform a dice roll (random 1-6)
-            dice_value = random.randint(1, 6)
 
-            # Check if the character stat value is not None
-            if char_stat is not None:
-                try:
-                    # Convert the character stat value to an integer
-                    char_stat_value = int(char_stat)
-                except ValueError:
-                    print(f"Error: The value is not a valid integer: {char_stat}")
-                    return False
-            else:
-                print("Error: The value is None.")
-                return False
-
-            # Calculate the result
-            result = (dice_value + char_stat_value) / 2
-
-            # Display the result of the dice roll
-            print(BLUE + f"{message} {dice_value}" + END_COLOR)
-            print(BLUE + f"Your dice roll combined with your character's stat gives you the power of {result}" + END_COLOR)
-
-            return result
-        elif choice == 'n':
-            print("You chose not to roll the dice. Ending the game.")
-            return False
-        else:
-            print("Invalid choice. Please enter 'y' to roll or 'n' to end the game.")
 
 def set_player():
     """
@@ -154,6 +128,41 @@ def get_story():
             return row[1]
 
     return None  # Return None if all rows have been collected
+def roll_dice_and_display(char_stat, message):
+    """
+    Perform a dice roll and display the result.
+    """
+    while True:
+        choice = input("Do you want to roll the dice? (y/n):\n").lower()
+        if choice == 'y':
+            # Perform a dice roll (random 1-6)
+            dice_value = random.randint(1, 6)
+
+            # Check if the character stat value is not None
+            if char_stat is not None:
+                try:
+                    # Convert the character stat value to an integer
+                    char_stat_value = int(char_stat)
+                except ValueError:
+                    print(f"Error: The value is not a valid integer: {char_stat}")
+                    return False
+            else:
+                print("Error: The value is None.")
+                return False
+
+            # Calculate the result
+            result = (dice_value + char_stat_value) / 2
+
+            # Display the result of the dice roll
+            print(BLUE + f"{message} {dice_value}" + END_COLOR)
+            print(BLUE + f"Your dice roll combined with your character's stat gives you the power of {result}" + END_COLOR)
+
+            return result
+        elif choice == 'n':
+            print("You chose not to roll the dice. Ending the game.")
+            return False
+        else:
+            print("Invalid choice. Please enter 'y' to roll or 'n' to end the game.")
 
 def ask_to_continue():
     """
@@ -318,7 +327,7 @@ def main():
                     break  # Exit the game loop
         else:
             break  # Exit the game loop
-    print(f"Thank you for playing {player_name}. Goodbye!")
+    print(f"Thank you for playing. Goodbye!")
 
 if __name__ == '__main__':
     main()
