@@ -17,7 +17,12 @@ END_COLOR = '\033[0m'  # Reset color to default
 
 CREDS = Credentials.from_service_account_file('creds.json')
 SCOPED_CREDS = CREDS.with_scopes(SCOPE)
-GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
+try:
+    GSPREAD_CLIENT = gspread.authorize(CREDS)
+except Exception as e:
+    print(f"Sorry, could not revtrieve data through Google Sheets API: {e}")
+    exit(1)
+
 SHEET = GSPREAD_CLIENT.open('rpg_p3')
 
 def roll_dice_and_display(char_stat, message):
