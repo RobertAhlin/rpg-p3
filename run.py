@@ -17,12 +17,7 @@ END_COLOR = '\033[0m'  # Reset color to default
 
 CREDS = Credentials.from_service_account_file('creds.json')
 SCOPED_CREDS = CREDS.with_scopes(SCOPE)
-try:
-    GSPREAD_CLIENT = gspread.authorize(CREDS)
-except Exception as e:
-    print(f"Sorry, could not revtrieve data through Google Sheets API: {e}")
-    exit(1)
-
+GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open('rpg_p3')
 
 def roll_dice_and_display(char_stat, message):
@@ -63,8 +58,8 @@ def roll_dice_and_display(char_stat, message):
 
 def set_player():
     """
-    Ask for the players name.
-    Create a character with name and stats for Stamina, Strength and Charisma.
+    Ask for the player's name.
+    Create a character with a name and stats for Stamina, Strength, and Charisma.
     """
     print("Please enter your name.")
     print("Just one name with one word.")
@@ -72,24 +67,28 @@ def set_player():
     player_name = input("Enter your name:\n")
     print(f"Welcome to the game {player_name}.")
 
-    print("You will now create you character.")
+    print("You will now create your character.")
 
-    # Check for a character name written with letters and max 20 long.
+    # Check for a character name written with letters and max 20 characters.
     while True:
         char_name = input("Enter a character name:\n")
 
         # Open the "player" sheet
         player_sheet = SHEET.worksheet('player')
-        existing_char_name = player_sheet.acell('B2').value.strip()  # Get the existing character name and remove leading/trailing spaces
+        existing_char_name_cell = player_sheet.acell('B2')
         
-        if char_name == existing_char_name:
-            print("Character already exist. Continuing the story...")
+        # Get the existing character name and remove leading/trailing spaces
+        existing_char_name = existing_char_name_cell.value.strip() if existing_char_name_cell.value else None
+
+        if existing_char_name is not None and char_name == existing_char_name:
+            print("Character already exists. Continuing the story...")
             return False
         else:
             print("New character in progress..")
-            reset_story() # Reset story for a new character.
+            reset_story()  # Reset the story for a new character.
+
         if char_name.isalpha() and len(char_name) <= 20:
-            char_name = char_name.capitalize()  # Make the first letter uppercase, if not.
+            char_name = char_name.capitalize()  # Make the first letter uppercase if not.
             break
         else:
             print("Character name must contain only letters and be a maximum of 20 characters.")
@@ -185,16 +184,19 @@ def reset_or_save():
             print("Invalid choice. Please enter 'r' to reset or 's' to save and quit.")
 
 def reset_story():
-    # Get all values from column A
+    # Remove all 'x' values from the "story" sheet
     story_sheet = SHEET.worksheet('story')
     column_a_values = story_sheet.col_values(1)
-
-    # Remove all 'x' values
+    
     for i, value in enumerate(column_a_values):
         if value == 'x':
             story_sheet.update_cell(i + 1, 1, '')
 
-    print("Story completely reset.")
+    # Clear row 2 in the "player" sheet
+    player_sheet = SHEET.worksheet('player')
+    player_sheet.delete_rows(2)
+
+    print("Story resetted.")
 
 def end_now():
     while True:
@@ -316,7 +318,7 @@ def main():
                     break  # Exit the game loop
         else:
             break  # Exit the game loop
-    print("Thank you for playing. Goodbye!")
+    print(f"Thank you for playing {player_name}. Goodbye!")
 
 if __name__ == '__main__':
     main()
