@@ -262,6 +262,7 @@ def dice_roll_journey():
     char_sta_value = SHEET.worksheet('player').acell('D2').value
     message = "With a roll of the dice combined with your strength, you invoke a surge\nof luck and chance. The dice dance through the air,\nand as they land, they reveal their outcome:"
     result = roll_dice_and_display(char_str_value, message)
+    row = []  # Initialize row
 
     if result is not False:
         # Get the 'diceroll' sheet
@@ -289,6 +290,7 @@ def dice_roll_meeting():
     char_cha_value = SHEET.worksheet('player').acell('E2').value
     message = "With a roll of the dice combined with your charisma, you invoke a surge\nof luck and chance. The dice dance through the air,\nand as they land, they reveal their outcome:"
     result = roll_dice_and_display(char_cha_value, message)
+    row = []  # Initialize row
 
     if result is not False:
         # Get the 'diceroll' sheet
