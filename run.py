@@ -320,24 +320,18 @@ def main():
 
             # Check if the storyline says it's time to roll dice.
             if storyline.endswith("Time to roll your dice:") and trigger == 1:
-                print(f"Trigger: {trigger}")
                 dice_roll_fight()
                 trigger = 2
-                print(f"Trigger set to 2")
 
             # Check if the storyline says it's time to roll dice.
             elif storyline.endswith("Time to roll your dice:") and trigger == 2:
-                print(f"Trigger: {trigger}")
                 dice_roll_journey()
                 trigger = 3
-                print(f"Trigger set to 3")
 
             # Check if the storyline says it's time to roll dice.
             elif storyline.endswith("Time to roll your dice:") and trigger == 3:
-                print(f"Trigger: {trigger}")
                 dice_roll_meeting()
                 trigger = 1
-                print(f"Trigger reset to 1")
             
 
             if not ask_to_continue():

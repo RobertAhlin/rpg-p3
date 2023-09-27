@@ -57,53 +57,43 @@ This will show what I learnt in the Python programming module. And also add some
 
 ### <a id="structure"></a>Structure
 
-- The structure is really simple. A run.py file to contain the code.
+- The structure is really simple. A python run file to contain the code.
 - Link to a Google Sheet to get and save data.
 
 
 ### <a id="skeleton"></a>Skeleton
 
-There is not much of a layout to talk about. But
+There is not much of a skeleton to mension here. All the code is in the run python file. Credentials for the API in another file that is put is set to the .gitignore so the credentials will not be visible.
 
 **Wireframe**
 
-For this project I tried the Balsamic to scetch a layout.<br>
-<img src="readmefiles/balsamic-idea.jpg" width="40%" alt="First idea done in Balsamic.">
-
-The basic idea is to have it simple with some small 3d effects.<br>
-I liked the theme I had in my first project with the rounded corners with different areas.
+When starting this project I tried to get my ideas in to a word document.<br>
+<img src="readmefiles/game-idea.jpg" width="40%" alt="First idea done in Balsamic.">
 
 ### <a id="surface"></a>Surface
 
-I was first thinking of to have a background color as the shade of a human skin. But as the skin can really vary in color I decided for "burlywood" after been trying out a couple of colors.
-I wanted the page to feel warm and light. So the combination of the burlywood color and the white "clouds" I think I achieved that.
+What is possible to do with a text based game?
+I wanted the player to experince some visual features that will happen for different event.
+- First I added some ascii art. I used a dragon.
+- Second, I wanted the story text to stand out from the "console happenings" so I found a way to colorize the text. The story text as yellow and dice rolls as blue text. 
+<img src="readmefiles/roll-dice-event.jpg" alt="Image example of text came with yellow story text and blue roll dice event text.">
 
 ## <a id="technologies"></a>Technologies
 
-1. HTML - To create a basic site
-2. CSS - To create a nice, standout front-end with a feel of 3d and shading.
-3. JavaScript to handle all the mechanics.
+1. Python - to create functions for the game.
+2. Google Sheet API - To connect to a Google Sheet.
+3. Google Sheet - for storing the text.
 
 ## <a id="features"></a>Features
 
 Existing Features
-- Navigation Bar
 
-There is a small navigation bar on the index page. I didn't want another page for the instructions so I made a hidden div that toggles hidden and shown when clicking the Instructions link.
-The navigation bar on the game page contains a link back to index page.
+The player will havt to be able to use a keyboard. To type letters to operate the game.
+First of all to enter a name, and then create a character with name and stats.
 
-A really cool hero image:<br>
-<img src="assets/images/hero-image.png" width="50%" alt="Hero image on landing page"><br>
-Something eye catching on the page to make the visitor interested.
-I  used some skills in Photoshop to make the image.
+Through the game it will ask if the player would like to continue or quit using the keys "c" respectively "q"
+The game will also ask if the player would like to roll the dice by typing letters "y" or "n".
 
-The first basic structure for the game looks like this:<br>
-![First structure.](readmefiles/first-layout.jpg)<br>
-This will be the main theme for all and will be added with contents.
-
-My design theme fits well to use a footer. In the footer I placed the ability to enter code.<br>
-![Image of the footer](readmefiles/footer.jpg)<br>
-It feels like a good place to have the cheat code area. It doesn't interfere with the game design but still it available.
 
 The game area. I wanted it to be simple. At first, I made it possible to first choose what move to play and then click a Play button to start. But after discussion with my mentor, I changed it, so the game starts as soon as the player click a hand. And then a one second wait timer to simulate that the robot is thinking. The score will increase by one up to ten to determine the winner. Then the game has to be restarted by clicking the reset score button.<br>
 ![Example of some images from the image page](readmefiles/game-area.jpg)
