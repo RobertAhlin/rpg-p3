@@ -16,7 +16,7 @@ RED = '\033[91m'
 GREEN = '\033[92m'
 YELLOW = '\033[93m'
 BLUE = '\033[94m'
-END_COLOR = '\033[0m'  # Reset color to default
+DEFAULT_COLOR = '\033[0m'  # Reset color to default
 
 CREDS = Credentials.from_service_account_file('creds.json')
 SCOPED_CREDS = CREDS.with_scopes(SCOPE)
@@ -45,7 +45,7 @@ def set_player():
         else:
             print("Your name must have only letters and be a max 20 characters.")
 
-    print(GREEN + f"Welcome to the game {player_name}." + END_COLOR)
+    print(GREEN + f"Welcome to the game {player_name}." + DEFAULT_COLOR)
 
     print("Time to create your character.")
 
@@ -158,8 +158,8 @@ def roll_dice_and_display(char_stat, message):
             result = (dice_value + char_stat_value) / 2
 
             # Display the result of the dice roll
-            print(BLUE + f"{message} {dice_value}" + END_COLOR)
-            print(BLUE + f"Your dice roll combined with your character's stat gives you the power of {result}" + END_COLOR)
+            print(BLUE + f"{message} {dice_value}" + DEFAULT_COLOR)
+            print(BLUE + f"Your dice roll combined with your character's stat gives you the power of {result}" + DEFAULT_COLOR)
 
             return result
         elif choice == 'n':
@@ -197,7 +197,7 @@ def reset_or_save():
             print("Invalid choice. Please enter 'r' to reset or 's' to save and quit.")
 
 def reset_story():
-    # Remove all 'x' values from the "story" sheet
+    # Remove all "x" values from the "story" sheet
     story_sheet = SHEET.worksheet('story')
     column_a_values = story_sheet.col_values(1)
     
@@ -214,16 +214,16 @@ def reset_story():
 
 def end_now():
     while True:
-        # Ask if the player wants to continue or quit
+        # Ask if the player wants to continue or quit.
         if not ask_to_continue():
-            # Ask if the player wants to reset or save
+            # Ask if the player wants to reset or save.
             choice = reset_or_save()
             if choice == 'reset':
-                # Reset the story (remove 'x' from column A)
+                # Reset game (remove "x" from column A)
                 reset_story()
-                break  # Exit the game loop
+                break
             elif choice == 'save':
-                break  # Exit the game loop
+                break
 
 def dice_roll_fight():
     """
@@ -237,7 +237,7 @@ def dice_roll_fight():
     row = []  # Initialize row
 
     if result is not False:
-        # Get the 'diceroll' sheet
+        # Get the "diceroll" sheet
         diceroll_sheet = SHEET.worksheet('diceroll')
         
         # Determine which row to print based on the dice roll result
@@ -250,7 +250,7 @@ def dice_roll_fight():
 
         # Print the corresponding row
         for cell_value in row:
-            print(YELLOW + cell_value + END_COLOR)
+            print(YELLOW + cell_value + DEFAULT_COLOR)
             break
 
 def dice_roll_journey():
@@ -263,13 +263,13 @@ def dice_roll_journey():
     char_sta_value = SHEET.worksheet('player').acell('D2').value
     message = "With a roll of the dice combined with your strength, you invoke a surge\nof luck and chance. The dice dance through the air,\nand as they land, they reveal their outcome:"
     result = roll_dice_and_display(char_str_value, message)
-    row = []  # Initialize row
+    row = []
 
     if result is not False:
-        # Get the 'diceroll' sheet
+        # Connect the "diceroll" sheet.
         diceroll_sheet = SHEET.worksheet('diceroll')
 
-        # Determine which row to print based on the dice roll result
+        # Determine which row to print based on the dice roll result.
         if 0 <= result <= 3:
             row = diceroll_sheet.row_values(6)
         elif 4 <= result <= 6:
@@ -277,9 +277,9 @@ def dice_roll_journey():
         elif 7 <= result <= 9:
             row = diceroll_sheet.row_values(8)
 
-        # Print the corresponding row
+        # Print the corresponding row.
         for cell_value in row:
-            print(YELLOW + cell_value + END_COLOR)
+            print(YELLOW + cell_value + DEFAULT_COLOR)
             break
 
 def dice_roll_meeting():
@@ -291,13 +291,13 @@ def dice_roll_meeting():
     char_cha_value = SHEET.worksheet('player').acell('E2').value
     message = "With a roll of the dice combined with your charisma, you invoke a surge\nof luck and chance. The dice dance through the air,\nand as they land, they reveal their outcome:"
     result = roll_dice_and_display(char_cha_value, message)
-    row = []  # Initialize row
+    row = []
 
     if result is not False:
-        # Get the 'diceroll' sheet
+        # Get the "diceroll" sheet
         diceroll_sheet = SHEET.worksheet('diceroll')
 
-        # Determine which row to print based on the dice roll result
+        # Decides which row to print based on the dice roll result.
         if 0 <= result <= 3:
             row = diceroll_sheet.row_values(10)
         elif 4 <= result <= 6:
@@ -305,31 +305,32 @@ def dice_roll_meeting():
         elif 7 <= result <= 9:
             row = diceroll_sheet.row_values(12)
 
-        # Print the corresponding row
+        # Print the right row.
         for cell_value in row:
             print(YELLOW + cell_value + END_COLOR)
             break
 
 def main():
+    """
+    Main game function to handle "game mechanics".
+    """
     set_player()
     trigger = 1
     while True:
         storyline = get_story()
 
         if storyline is not None:
-            print(YELLOW + storyline + END_COLOR)
+            print(YELLOW + storyline + DEFAULT_COLOR)
 
             # Check if the storyline says it's time to roll dice.
             if storyline.endswith("Time to roll your dice:") and trigger == 1:
                 dice_roll_fight()
                 trigger = 2
 
-            # Check if the storyline says it's time to roll dice.
             elif storyline.endswith("Time to roll your dice:") and trigger == 2:
                 dice_roll_journey()
                 trigger = 3
 
-            # Check if the storyline says it's time to roll dice.
             elif storyline.endswith("Time to roll your dice:") and trigger == 3:
                 dice_roll_meeting()
                 trigger = 1
@@ -338,14 +339,14 @@ def main():
             if not ask_to_continue():
                 choice = reset_or_save()
                 if choice == 'reset':
-                    # Reset the story (remove 'x' from column A)
+                    # Resetting story (remove "x" from column A).
                     reset_story()
-                    break  # Exit the game loop
+                    break
                 elif choice == 'save':
-                    break  # Exit the game loop
+                    break
         else:
             reset_story()
-            break  # Exit the game loop
+            break
 
     print(f"Thank you for playing. Goodbye!\n")
     print(RED + f"Rebooting game...\n" + END_COLOR)

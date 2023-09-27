@@ -2,7 +2,8 @@
 <img src="readmefiles/dragon-elf-img.jpg" alt="Fantasy picture of a dragon and a female elf."><br>
 ## Second project at Code Institute
 
-Text
+Welcome to a fantasy adventure.<br>
+A role playing text game.
 
 # <a id="table-of-content"></a>Table of Content
 
