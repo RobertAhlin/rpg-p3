@@ -1,5 +1,5 @@
 # <a id="the-game"></a>RPG - Text (console) based role playing game.
-
+<img src="readmefiles/dragon-elf-img.jpg" alt="Fantasy picture of a dragon and a female elf."><br>
 ## Second project at Code Institute
 
 Text
@@ -28,47 +28,42 @@ Text
 
 # <a id="demo"></a>Demo
 
-<img src="readmefiles/amiresponsive.jpg" alt="Website shown in different devices."><br>
-
 The live link to Heroku can be found here - <a href="https://rpg-p3-40e9a3ed28c2.herokuapp.com/" target="_blank">https://rpg-p3-40e9a3ed28c2.herokuapp.com/</a>
 
-The idea for this project it to make a playable textbased role playing game with a realy humorous twist. 
+The idea for this project it to make a playable textbased role playing game with a really humorous twist. I kind of had a story in my head, but to save time on writing text, I used ChatGPT to generate the text. I've edited some to make it fit more to the game play.
 
 # <a id="user-experience"></a>User Experience
 
-The user of this website...
+I wanted the user (player) to get a good experience even though it is only a text based game. 
 
 ## <a id="user-stories"></a>User stories
 
-A visitor to the site should:
+A player should:
 
-- Get a wow-feeling on the landing page and get interested to try the game.
-- Understand the purpose of this website quickly and easily.
-- Easily navigate the website.
+- Be able to create a character.
+- Be able to save the character.
+- Easily understand the came commands.
 - Play a game for fun.
-- Get an understanding the Rock, Paper, Scissors game.
-- Be able to enter cheat code to be able to always win.
+- Have at least one good laugh.
 
 ### <a id="strategy"></a>Strategy
 
-The goal is to make a well-functioning interesting website. The focus was on making the design a fun, user-friendly and creative site.
+I aimed for a text based role playing game where a player should be able to create and name a character with some simple stats. The characters stats combined with dice rolls would determen the outcome. For example: If the character has more strength it will be able to fight the dragon. If it has more charisma it will be more "lucky with partners". Even if the main story is one there will be three different side events from every time the dice rolls.
+The story should be able to be editied easily in a Google Sheet. That will act as a database for the storyline, dice roll events and saving player and character.
 
 ### <a id="scope"></a>Scope
 
-For the purpose to show my knowledge in JavaScript, as well as doing something fun. And also add something different like thinking outside the box with the possibility to enter cheat code.
+This will show what I learnt in the Python programming module. And also add something different like thinking outside the box with the possibility to enter cheat code.
 
 ### <a id="structure"></a>Structure
 
-I aimed for a simple website that should contain as little clicks as possible. Also as little scrolling as possible. Even though it's quite easy to scroll up and down on a cell phone I still wanted it to be possible to get a quick overview of the game. I wanted to minimize the usage of Media Queries and have a responsive site by using precent in widths etc.
+- The structure is really simple. A run.py file to contain the code.
+- Link to a Google Sheet to get and save data.
 
-**Website:**
-
-1. **_Home / Index page:_** Landing page with a hero image. Link to play page and some instructions included.
-2. **_Game:_** The game area with clickable images to play.
 
 ### <a id="skeleton"></a>Skeleton
 
-The website is designed to be clear and simple. And the site has a simple tree structure with hierarchical flows from top to bottom.
+There is not much of a layout to talk about. But
 
 **Wireframe**
 
@@ -203,9 +198,9 @@ The site was deployed to Heroku. Using the Code institute guidence from Love San
 <ul>
 <li>For this project I want to credit the Google search engine. It's hard to remember how to write all codes.</li>
 <li>A lot of help comes from search hits at the "stack overflow" forums.</li>
-<li>The game story written by ChatGPT with my instructions.
+<li>The game story written by ChatGPT with my instructions of a fantasy story including hilarious adventures of an elf and a dragon.
 </ul>
 
 ### <a id="acknowledgements"></a>Acknowledgements
 
-- My mentor, Medale Oluwafemi, for great suggestions and help and for showing how use document tags at <a href="https://jsdoc.app/about-getting-started.html" target="_blank">https://JSDoc.app</a>
+- Thanks David Calikes for jumping in on short notice to take a meeting when mentor was not available. And thank you for valuable advices.
