@@ -100,15 +100,19 @@ Google Sheet
 
 The game use a Google Sheet as a database. This to easily edit the text of the story. There is one sheet for the main story, one sheet for events from the roll dice, and one sheet for the player and character data.
 
+Game play functions
+
+There is one main story in the 
+
 Error handling
 
 The game has error handling to:
 <ul>
 <li>Check the API connection to Google Sheet.</li>
-<li>Check that "rpg_p3" Google Sheet exists. </li>
-<li>Rerstrict the player name only to </li>
-<li></li>
-<li></li>
+<li>Check that "rpg_p3" Google Sheet exists.</li>
+<li>Restrict the player name only to alphabetical letters and max 20 character long.</li>
+<li>Restrict the character name only to alphabetical letters and max 20 character long.</li>
+<li>Set the total value of character stats to 12.</li>
 <li></li>
 <li></li>
 </ul>
@@ -123,8 +127,8 @@ I've been using the responsive layout a lot in inspect mode using Google Chrome.
 
 Is there more to add to the game?
 <ul>
-<li> The ability to go to next level if you win a round of ten points. Just for fun. The game can't be "harder" on a higher level. :-D</li>
-<li> Adding more codes for different features.</li>
+<li></li>
+<li></li>
 </ul>
 
 ## <a id="testing"></a>Testing
@@ -133,6 +137,7 @@ I started to stuggle a bit with updating cells in google sheet.
 I wanted the cells to update with one row of data:<br>
      ```character_data = [player_name, char_name, char_str, char_sta, char_cha] ```<br>
      ```player_sheet.update("A2:E2", [character_data]) ```
+     
 
 Event though it works the terminal gives me the following warning:<br>
     " ```/home/codeany/.local/lib/python3.8/site-packages/gspread/worksheet.py:1069: UserWarning: [Deprecated][in version 6.0.0]: method signature will change to: 'Worksheet.update(value = [[]], range_name=)' arguments 'range_name' and 'values' will swap, values will be mandatory of type: 'list(list(...))'

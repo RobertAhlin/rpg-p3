@@ -106,10 +106,7 @@ def set_player():
     print(f"Strength: {char_str}\nStamina: {char_sta}\nCharisma: {char_cha}\nGame starting...")
 
     # Open the "player" sheet
-    player_sheet = SHEET.worksheet('player')
-    
-    # character_data = [player_name, char_name, char_str, char_sta, char_cha]
-    # player_sheet.update("A2:E2", [character_data])
+    player_sheet = SHEET.worksheet('player')   
     player_sheet.update_acell('A2', player_name)
     player_sheet.update_acell('B2', char_name)
     player_sheet.update_acell('C2', char_str)
