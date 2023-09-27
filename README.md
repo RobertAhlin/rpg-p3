@@ -1,6 +1,6 @@
 # <a id="the-game"></a>RPG - Text (console) based role playing game.
 <img src="readmefiles/dragon-elf-img.jpg" alt="Fantasy picture of a dragon and a female elf."><br>
-## Second project at Code Institute
+## Third project at Code Institute
 
 Welcome to a fantasy adventure.<br>
 A role playing text game.
@@ -35,30 +35,32 @@ The idea for this project it to make a playable textbased role playing game with
 
 # <a id="user-experience"></a>User Experience
 
-I wanted the user (player) to get a good experience even though it is only a text based game. 
+I wanted the user (player) to get a good experience even though it is only a text based game.<br>
+What can be done with text? Colors? Ascii art? Yes I used it.
 
 ## <a id="user-stories"></a>User stories
 
 A player should:
 
 - Be able to create a character, that will be saved.
-- Easily understand the came commands.
+- Easily understand the game commands.
 - Play a game for fun.
 - Have at least one good laugh.
 
 ### <a id="strategy"></a>Strategy
 
-I aimed for a text based role playing game where a player should be able to create and name a character with some simple stats. The characters stats combined with dice rolls would determen the outcome. For example: If the character has more strength it will be able to fight the dragon. If it has more charisma it will be more "lucky with partners". Even if the main story is one there will be three different side events from every time the dice rolls.
+I aimed for a text based role playing game where a player should be able to create and name a character with some simple stats. The characters stats combined with dice rolls would determine the outcome. For example: If the character has more strength it will be able to fight the dragon. If it has more charisma it will be more "lucky with partners". Even if the main story will end up the same, there will be three different side events from every time the dice rolls.
 The story should be able to be editied easily in a Google Sheet. That will act as a database for the storyline, dice roll events and saving player and character.
 
 ### <a id="scope"></a>Scope
 
-This will show what I learnt in the Python programming module.
+This will show what I learnt in the Python programming module.<br>
+I had to choose not to include many of my ideas. Some examples can be found in the More feature list.
 
 ### <a id="structure"></a>Structure
 
 - The structure is really simple. A python run file to contain the code.
-- Link to a Google Sheet to get and save data.
+- Linked to a Google Sheet through an API to get and save data.
 
 
 ### <a id="skeleton"></a>Skeleton
@@ -68,14 +70,14 @@ There is not much of a skeleton to mension here. All the code is in the run pyth
 **Wireframe**
 
 When starting this project I tried to get my ideas in to a word document.<br>
-<img src="readmefiles/game-idea.jpg" width="40%" alt="First idea done in Balsamic.">
+<img src="readmefiles/game-idea.jpg" width="40%" alt="Image from my idea sheet in Word.">
 
 ### <a id="surface"></a>Surface
 
 What is possible to do with a text based game?
 I wanted the player to experince some visual features that will happen for different event.
 - First I added some ascii art. I used a dragon.
-- Second, I wanted the story text to stand out from the "console happenings" so I found a way to colorize the text. The story text as yellow and dice rolls as blue text. 
+- Second, I wanted the story text to stand out from the "console text" so I found a way to colorize the text. The story text as yellow and dice rolls as blue text. 
 <img src="readmefiles/roll-dice-event.jpg" alt="Image example of text came with yellow story text and blue roll dice event text.">
 
 ## <a id="technologies"></a>Technologies
@@ -90,11 +92,14 @@ Existing Features
 
 The player will have to be able to use a keyboard to type letters to operate the game.
 First of all to enter a name, and then create a character with name and stats.<br>
-<img src="readmefiles/screenshot_01.jpg" alt="Image example of the game starting."><br>
-<img src="readmefiles/screenshot_02.jpg" alt="Image example of the game showing a chreated character.">
+<img src="readmefiles/screenshot_01a.jpg" alt="Image example of the game starting."><br>
 
-Through the game it will ask if the player would like to continue or quit using the keys "c" respectively "q"
-The game will also ask if the player would like to roll the dice by typing letters "y" or "n".
+Through the game it will ask if the player would like to continue or quit using the keys "c" respectively "q".<br>
+<img src="readmefiles/screenshot_02a.jpg" alt="Image example of option to continue or quit game."><br>
+
+The game will also ask if the player would like to roll the dice by typing letters "y" or "n".<br>
+<img src="readmefiles/screenshot_02b.jpg" alt="Image example of option to roll dice or not."><br>
+
 
 Google Sheet
 
@@ -110,7 +115,7 @@ The lenght of the sentencies are set to mach the width of the console. Just so t
 If the text in the story ends with "Time to roll your dice:" it will trigger next roll dice event.<br>
 <img src="readmefiles/google-sheet_02.jpg" alt="Example from text ending with Time to roll your dice:"><br>
 
-The roll dice event will add the value from a dice roll (1-6) with the stats from the character and then make divide it by 2 to get the average value. That value will set what text will be get from the "diceroll" sheet.<br>
+The roll dice event will add the value from a dice roll (1-6) with the stats from the character and then divide it by 2 to get the average value. That value will set what text to display from the "diceroll" sheet.<br>
 <img src="readmefiles/flowchart.jpg" alt="A flowchart of the game mechanics."><br>
 
 Error handling
@@ -122,7 +127,7 @@ The game has error handling to:
 <li>Restrict the player name only to alphabetical letters and max 20 character long.</li>
 <li>Restrict the character name only to alphabetical letters and max 20 character long.</li>
 <li>Set the total value of character stats to 12.</li>
-<li></li>
+<li>Make sure the player only enter numbers for stats.</li>
 <li></li>
 </ul>
 
@@ -162,12 +167,16 @@ So I changed it to update each cell individually. Not pretty, I know, but couldn
      ```player_sheet.update_acell('D2', char_sta)```<br>
      ```player_sheet.update_acell('E2', char_cha)```<br>
 
+Validating
+
+I googled for any PEP8 and Python code validators, but could find anyone working. Some just threw errors on the API credentials and some didn't work at all. After spending some time to find a validator that worked I gave up. 
+
 ### <a id="bugs"></a>Bugs?
 
-I haven't not really encountered any bugs in this project.
+I haven't really encountered any bugs in this project.<br>
+I got stuck severel times in order to figure out different things but that all about learning.
 
 ## <a id="deployment"></a>Deployment
-
 
 The site was deployed to Heroku. Using the Code institute guidence from Love Sandwiches walkthrough.
 <ul>

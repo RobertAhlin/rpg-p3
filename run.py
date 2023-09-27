@@ -20,6 +20,10 @@ DEFAULT_COLOR = '\033[0m'  # Reset color to default
 
 CREDS = Credentials.from_service_account_file('creds.json')
 SCOPED_CREDS = CREDS.with_scopes(SCOPE)
+
+"""
+Error handling if Google sheet is not found
+"""
 try:
     GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
     SHEET = GSPREAD_CLIENT.open('rpg_p3')
@@ -33,7 +37,7 @@ except (Exception, SpreadsheetNotFound) as e:
 def set_player():
     """
     Ask for the player's name.
-    Create a character with a name and stats for Stamina, Strength, and Charisma.
+    Create a char with a name and stats for Stamina, Strength, and Charisma.
     """
     print("To start, would you please tell us who you are?")
 
@@ -49,11 +53,10 @@ def set_player():
 
     print("Time to create your character.")
 
-    # Check for a character name written with letters and max 20 characters.
+    # Check if character name is written with letters and max 20 characters.
     while True:
         char_name = input("Enter a character name:\n")
 
-        # Open the "player" sheet
         player_sheet = SHEET.worksheet('player')
         existing_char_name_cell = player_sheet.acell('B2')
         
@@ -61,25 +64,24 @@ def set_player():
         existing_char_name = existing_char_name_cell.value.strip() if existing_char_name_cell.value else None
 
         if char_name.isalpha() and len(char_name) <= 20:
-            char_name = char_name.capitalize()  # Make the first letter uppercase.
+            char_name = char_name.capitalize()
             if existing_char_name is not None and char_name == existing_char_name:
                 print("Character already exists. Continuing the story...")
                 return False
             else:
                 print("New character in progress...")
-                reset_story()  # Reset the story for a new character.
+                reset_story()  # Reset the story if new character name is entered.
             break
         else:
-            print("Name must contain only letters and be a maximum of 20 characters.")
+            print("Name must contain letters only and be a maximum of 20 characters.")
 
         
     print("\nYou will now create stats for your character.")
 
-    cp = 12 # Character Points to distribute over stats (cp).
+    cp = 12 # Character Points (cp) to distribute over stats.
 
     print(f"You have a total of {cp} Character Points to \ndistribute over Strength, Stamina, and Charisma.")
 
-    # Initialize stats.
     char_str = None
     char_sta = None
     char_cha = None
@@ -91,17 +93,18 @@ def set_player():
             char_sta = int(input("Stamina:\n"))
             char_cha = int(input("Charisma:\n"))
 
-            # Check if the sum of the entered stats is less than or equal to "cp".
+            # Check if the sum of the stats is less than or equal to "cp".
             if char_str + char_sta + char_cha <= cp:
                 break  # Exit the loop if the input is valid.
             else:
-                print(f"Total Character Points exceed {cp}. Please reenter values.")
+                print(f"Total Character Points exceed {cp}. Reenter values.")
         except ValueError:
             print("Please enter numeric values only.")
 
     # Shoow valid values for char_str, char_sta, and char_cha to player
     print(f"Welcome to the world {char_name}! Your stats are:")
-    print(f"Strength: {char_str}\nStamina: {char_sta}\nCharisma: {char_cha}\nGame starting...")
+    print(f"Strength: {char_str}\nStamina: {char_sta}\nCharisma: {char_cha}")
+    print("Game starting...")
 
     # Open the "player" sheet
     player_sheet = SHEET.worksheet('player')   
@@ -113,8 +116,8 @@ def set_player():
 
 def get_story():
     """
-    Get one value from the story sheet in your Google Sheet.
-    Mark column A with 'x' if column B has been used.
+    Get text from the story sheet from Google Sheet.
+    Mark row in col A with "x" if col B has been used.
     """
     story_sheet = SHEET.worksheet('story')
     story_data = story_sheet.get_all_values()
@@ -127,10 +130,11 @@ def get_story():
             last_retrieved_index += 1
             continue  # Skip rows that have already been used.
         if row[1]:  # Check if column B has a value.
-            story_sheet.update_cell(last_retrieved_index + 1, 1, 'x')  # Mark column A with 'x'
+            # If, mark column A with 'x'
+            story_sheet.update_cell(last_retrieved_index + 1, 1, 'x')  
             return row[1]
 
-    return None  # Return None if all rows have been used.
+    return None  # Return None if story ended.
 
 def roll_dice_and_display(char_stat, message):
     """
@@ -151,7 +155,7 @@ def roll_dice_and_display(char_stat, message):
                     print(f"Error: The value is not a valid integer: {char_stat}")
                     return False
             else:
-                print("Error: The value is None.")
+                print("Error: The value is None. Are the character stats set?")
                 return False
 
             # Calculate the result
@@ -349,7 +353,7 @@ def main():
             break
 
     print(f"Thank you for playing. Goodbye!\n")
-    print(RED + f"Rebooting game...\n" + END_COLOR)
+    print(RED + f"Rebooting game...\n" + DEFAULT_COLOR)
 
     # Restart game
     python = sys.executable
