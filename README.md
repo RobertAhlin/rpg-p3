@@ -40,8 +40,7 @@ I wanted the user (player) to get a good experience even though it is only a tex
 
 A player should:
 
-- Be able to create a character.
-- Be able to save the character.
+- Be able to create a character, that will be saved.
 - Easily understand the came commands.
 - Play a game for fun.
 - Have at least one good laugh.
@@ -53,7 +52,7 @@ The story should be able to be editied easily in a Google Sheet. That will act a
 
 ### <a id="scope"></a>Scope
 
-This will show what I learnt in the Python programming module. And also add something different like thinking outside the box with the possibility to enter cheat code.
+This will show what I learnt in the Python programming module.
 
 ### <a id="structure"></a>Structure
 
@@ -88,7 +87,7 @@ I wanted the player to experince some visual features that will happen for diffe
 
 Existing Features
 
-The player will havt to be able to use a keyboard. To type letters to operate the game.
+The player will have to be able to use a keyboard to type letters to operate the game.
 First of all to enter a name, and then create a character with name and stats.<br>
 <img src="readmefiles/screenshot_01.jpg" alt="Image example of the game starting."><br>
 <img src="readmefiles/screenshot_02.jpg" alt="Image example of the game showing a chreated character.">
@@ -100,9 +99,18 @@ Google Sheet
 
 The game use a Google Sheet as a database. This to easily edit the text of the story. There is one sheet for the main story, one sheet for events from the roll dice, and one sheet for the player and character data.
 
-Game play functions
+Game play mechanics
 
-There is one main story in the 
+There is one main story in the Google Sheet document.
+Each section of the game has its on row in the sheet.
+Each line in the sheet will be checked if its been used. If not it will be marked by an "x" to be able to continue.
+The lenght of the sentencies are set to mach the width of the console. Just so the row brake doesn't happen within a word. Also the text block are small enough to fit within the console windows to prevent the need of scrolling to read the text.
+<img src="readmefiles/google-sheet_01.jpg" alt="Example from a marked google sheet row"><br>
+If the text in the story ends with "Time to roll your dice:" it will trigger next roll dice event.<br>
+<img src="readmefiles/google-sheet_02.jpg" alt="Example from text ending with Time to roll your dice:"><br>
+
+The roll dice event will add the value from a dice roll (1-6) with the stats from the character and then make divide it by 2 to get the average value. That value will set what text will be get from the "diceroll" sheet.<br>
+<img src="readmefiles/flowchart.jpg" alt="A flowchart of the game mechanics."><br>
 
 Error handling
 
@@ -119,26 +127,29 @@ The game has error handling to:
 
 ## <a id="finalising"></a>Finalising
 
-<img src="readmefiles/index-image.jpg" width="50%" alt="Image of the landing page."><br>
-<img src="readmefiles/gamepage-image.jpg" width="50%" alt="Image of the game page."><br>
-I've been using the responsive layout a lot in inspect mode using Google Chrome.
+<img src="readmefiles/screenshot_03.jpg" alt="Image of the Heroku console when game is in action"><br>
+
 
 ## <a id ="more-features"></a>More Features?
 
-Is there more to add to the game?
-<ul>
-<li></li>
-<li></li>
-</ul>
+Is there more to add to the game?<br>
+It feels like this game can be expanded to endless.
+
+- Option to go for different storylines.
+- Feature to be able to answer the riddles.
+- Different event can upgrade the character stats.
+- Create a garphic interface.
+
 
 ## <a id="testing"></a>Testing
+
+Through the developing of the game I made sure I had something to run in the console. So whenever I made something I tested it. So continuesly testing the game has been important.
 
 I started to stuggle a bit with updating cells in google sheet.
 I wanted the cells to update with one row of data:<br>
      ```character_data = [player_name, char_name, char_str, char_sta, char_cha] ```<br>
      ```player_sheet.update("A2:E2", [character_data]) ```
      
-
 Event though it works the terminal gives me the following warning:<br>
     " ```/home/codeany/.local/lib/python3.8/site-packages/gspread/worksheet.py:1069: UserWarning: [Deprecated][in version 6.0.0]: method signature will change to: 'Worksheet.update(value = [[]], range_name=)' arguments 'range_name' and 'values' will swap, values will be mandatory of type: 'list(list(...))'
   warnings.warn(" ```
@@ -150,35 +161,9 @@ So I changed it to update each cell individually. Not pretty, I know, but couldn
      ```player_sheet.update_acell('D2', char_sta)```<br>
      ```player_sheet.update_acell('E2', char_cha)```<br>
 
-In contrast to the first project. I continuously tested the code along to with coding to make sure everything is ok.
-
-Some things that come up is to add a header to each section in the html code. But I later changed the sections and just had one header added.
-
-The CSS Validator gave me two errors. One that I had forgot to write a unit on a margin. And the second one was that I had typed "position; bottom;"
-which I changed to "position; fixed;".
-
-I also used Lighthouse in Chrome to find ways to increase the accessibility of the website.<br>
-
-Links to the validation
-<ul>
-<li> HTML of <a href="https://validator.w3.org/nu/?doc=https%3A%2F%2Frobertahlin.github.io%2Frps-project2b%2Findex.html" target="_blank">index</a> page.</li>
-<li> HTML of <a href="https://validator.w3.org/nu/?doc=https%3A%2F%2Frobertahlin.github.io%2Frps-project2b%2Fgame.html" target="_blank">game</a> page.</li>
-<li> CSS of <a href="https://jigsaw.w3.org/css-validator/validator?uri=https%3A%2F%2Frobertahlin.github.io%2Frps-project2b%2Fassets%2Fcss%2Fstyle.css&profile=css3svg&usermedium=all&warning=1&vextwarning=&lang=en" target="_blank">style.css</a>.</li>
-<li> To validate my JavaScript I  used <a href="https://jshint.com/" target="_blank">https://jshint.com/</a>. (Couldn't find a way to post links, directly to the JavaScript file.)</li>
-</ul>
-
-Other than the validators. I've been using the Inspect view in Google Crome using different layout for different devices and a lot with the responsive layout.
-I also tested the website through my iPhone.
-I've tested the website on a PC using Chrome and Edge web browsers.
-Also, my mentor has tried the website.
-
 ### <a id="bugs"></a>Bugs?
 
-<ul>
-<li>There is something with the "swap image function" when clicking the "Reset scores" button. Sometimes it doesn't swap to the "down button image". After hard refreshing the page a couple of times it works. Sometimes it works when holding down the mouse button for a while. It also seems to work better in Microsoft Edge.</li>
-<li>Also the swap image function doesn't seem to respond when in inspect mode in Google Chrome.
-<li>The toggle of div containing the instructions on the index page don't work when the script is in the script.js file. I had to place it in another file called index-script.js. I discovered that if I placed it first in the script.js document it worked, but then the swap image effect on the "Reset Score" button stopped working completely. I couldn't figure out why. So the solutions was to have them in different files.</li>
-</ul>
+I haven't not really encountered any bugs in this project.
 
 ## <a id="deployment"></a>Deployment
 
@@ -201,14 +186,15 @@ The site was deployed to Heroku. Using the Code institute guidence from Love San
     <li></li>
     </ol>
 </ul>
-
+Link to the game at Heroku: <a href="https://rpg-p3-40e9a3ed28c2.herokuapp.com/" target="_blank">https://rpg-p3-40e9a3ed28c2.herokuapp.com/</a>
 
 ## <a id="credits"></a>Credits
 
 <ul>
 <li>For this project I want to credit the Google search engine. It's hard to remember how to write all codes.</li>
 <li>A lot of help comes from search hits at the "stack overflow" forums.</li>
-<li>The game story written by ChatGPT with my instructions of a fantasy story including hilarious adventures of an elf and a dragon.
+<li>The game story written by ChatGPT with my instructions of a fantasy story including hilarious adventures of an elf and a dragon.</li>
+<li>Adobe Photoshop to edit the dragon-elf image for this readme.</li>
 </ul>
 
 ### <a id="acknowledgements"></a>Acknowledgements

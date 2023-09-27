@@ -30,8 +30,6 @@ except (Exception, SpreadsheetNotFound) as e:
         print(f"Sorry, there was an error authorizing Google Sheets API: {e}")
     exit(1)
 
-
-
 def set_player():
     """
     Ask for the player's name.
@@ -42,14 +40,14 @@ def set_player():
     while True:
         player_name = input("Enter your name:\n")
         if player_name.isalpha() and len(player_name) <= 20:
-            player_name = player_name.capitalize()  # Make the first letter uppercase if not.
+            player_name = player_name.capitalize()  # Set the first letter to uppercase.
             break
         else:
-            print("Your name must contain only letters and be a max 20 characters.")
+            print("Your name must have only letters and be a max 20 characters.")
 
     print(GREEN + f"Welcome to the game {player_name}." + END_COLOR)
 
-    print("You will now create your character.")
+    print("Time to create your character.")
 
     # Check for a character name written with letters and max 20 characters.
     while True:
@@ -59,11 +57,11 @@ def set_player():
         player_sheet = SHEET.worksheet('player')
         existing_char_name_cell = player_sheet.acell('B2')
         
-        # Get the existing character name.
+        # Get any existing character name from google sheet.
         existing_char_name = existing_char_name_cell.value.strip() if existing_char_name_cell.value else None
 
         if char_name.isalpha() and len(char_name) <= 20:
-            char_name = char_name.capitalize()  # Make the first letter uppercase if not.
+            char_name = char_name.capitalize()  # Make the first letter uppercase.
             if existing_char_name is not None and char_name == existing_char_name:
                 print("Character already exists. Continuing the story...")
                 return False
@@ -72,7 +70,7 @@ def set_player():
                 reset_story()  # Reset the story for a new character.
             break
         else:
-            print("Character name must contain only letters and be a maximum of 20 characters.")
+            print("Name must contain only letters and be a maximum of 20 characters.")
 
         
     print("\nYou will now create stats for your character.")
@@ -81,21 +79,21 @@ def set_player():
 
     print(f"You have a total of {cp} Character Points to \ndistribute over Strength, Stamina, and Charisma.")
 
-    # Initialize stats as None to enter the loop.
+    # Initialize stats.
     char_str = None
     char_sta = None
     char_cha = None
 
     while True:
         try:
-            # Ask for input for each stat
+            # Ask for input for stats.
             char_str = int(input("Strength:\n"))
             char_sta = int(input("Stamina:\n"))
             char_cha = int(input("Charisma:\n"))
 
-            # Check if the sum of the entered stats is less than or equal to "cp"
+            # Check if the sum of the entered stats is less than or equal to "cp".
             if char_str + char_sta + char_cha <= cp:
-                break  # Exit the loop if the input is valid
+                break  # Exit the loop if the input is valid.
             else:
                 print(f"Total Character Points exceed {cp}. Please reenter values.")
         except ValueError:
@@ -115,9 +113,8 @@ def set_player():
 
 def get_story():
     """
-    Get one value from the 'story' sheet in your Google Sheet.
-    Mark column A with 'x' if column B has been collected.
-    Return the collected value.
+    Get one value from the story sheet in your Google Sheet.
+    Mark column A with 'x' if column B has been used.
     """
     story_sheet = SHEET.worksheet('story')
     story_data = story_sheet.get_all_values()
@@ -128,12 +125,12 @@ def get_story():
         row = story_data[last_retrieved_index]
         if row[0] == 'x':
             last_retrieved_index += 1
-            continue  # Skip rows that have already been collected
-        if row[1]:  # Check if column B has a value
+            continue  # Skip rows that have already been used.
+        if row[1]:  # Check if column B has a value.
             story_sheet.update_cell(last_retrieved_index + 1, 1, 'x')  # Mark column A with 'x'
             return row[1]
 
-    return None  # Return None if all rows have been collected
+    return None  # Return None if all rows have been used.
 
 def roll_dice_and_display(char_stat, message):
     """
