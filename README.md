@@ -89,14 +89,29 @@ I wanted the player to experince some visual features that will happen for diffe
 Existing Features
 
 The player will havt to be able to use a keyboard. To type letters to operate the game.
-First of all to enter a name, and then create a character with name and stats.
+First of all to enter a name, and then create a character with name and stats.<br>
+<img src="readmefiles/screenshot_01.jpg" alt="Image example of the game starting."><br>
+<img src="readmefiles/screenshot_02.jpg" alt="Image example of the game showing a chreated character.">
 
 Through the game it will ask if the player would like to continue or quit using the keys "c" respectively "q"
 The game will also ask if the player would like to roll the dice by typing letters "y" or "n".
 
+Google Sheet
 
-The game area. I wanted it to be simple. At first, I made it possible to first choose what move to play and then click a Play button to start. But after discussion with my mentor, I changed it, so the game starts as soon as the player click a hand. And then a one second wait timer to simulate that the robot is thinking. The score will increase by one up to ten to determine the winner. Then the game has to be restarted by clicking the reset score button.<br>
-![Example of some images from the image page](readmefiles/game-area.jpg)
+The game use a Google Sheet as a database. This to easily edit the text of the story. There is one sheet for the main story, one sheet for events from the roll dice, and one sheet for the player and character data.
+
+Error handling
+
+The game has error handling to:
+<ul>
+<li>Check the API connection to Google Sheet.</li>
+<li>Check that "rpg_p3" Google Sheet exists. </li>
+<li>Rerstrict the player name only to </li>
+<li></li>
+<li></li>
+<li></li>
+<li></li>
+</ul>
 
 ## <a id="finalising"></a>Finalising
 
@@ -106,7 +121,7 @@ I've been using the responsive layout a lot in inspect mode using Google Chrome.
 
 ## <a id ="more-features"></a>More Features?
 
-A couple of things is in my mind.
+Is there more to add to the game?
 <ul>
 <li> The ability to go to next level if you win a round of ten points. Just for fun. The game can't be "harder" on a higher level. :-D</li>
 <li> Adding more codes for different features.</li>

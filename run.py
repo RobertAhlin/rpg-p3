@@ -37,11 +37,17 @@ def set_player():
     Ask for the player's name.
     Create a character with a name and stats for Stamina, Strength, and Charisma.
     """
-    print("Please enter your name.")
-    print("Just one name with one word.")
+    print("To start, would you please tell us who you are?")
 
-    player_name = input("Enter your name:\n")
-    print(f"Welcome to the game {player_name}.")
+    while True:
+        player_name = input("Enter your name:\n")
+        if player_name.isalpha() and len(player_name) <= 20:
+            player_name = player_name.capitalize()  # Make the first letter uppercase if not.
+            break
+        else:
+            print("Your name must contain only letters and be a max 20 characters.")
+
+    print(GREEN + f"Welcome to the game {player_name}." + END_COLOR)
 
     print("You will now create your character.")
 
@@ -53,28 +59,29 @@ def set_player():
         player_sheet = SHEET.worksheet('player')
         existing_char_name_cell = player_sheet.acell('B2')
         
-        # Get the existing character name and remove leading/trailing spaces
+        # Get the existing character name.
         existing_char_name = existing_char_name_cell.value.strip() if existing_char_name_cell.value else None
-
-        if existing_char_name is not None and char_name == existing_char_name:
-            print("Character already exists. Continuing the story...")
-            return False
-        else:
-            print("New character in progress..")
-            reset_story()  # Reset the story for a new character.
 
         if char_name.isalpha() and len(char_name) <= 20:
             char_name = char_name.capitalize()  # Make the first letter uppercase if not.
+            if existing_char_name is not None and char_name == existing_char_name:
+                print("Character already exists. Continuing the story...")
+                return False
+            else:
+                print("New character in progress...")
+                reset_story()  # Reset the story for a new character.
             break
         else:
             print("Character name must contain only letters and be a maximum of 20 characters.")
 
+        
     print("\nYou will now create stats for your character.")
-    print("You have a total of 12 Character Points (CP) to distribute over Strength, Stamina, and Charisma.")
 
-    cp = 12
+    cp = 12 # Character Points to distribute over stats (cp).
 
-    # Initialize stats as None to enter the loop
+    print(f"You have a total of {cp} Character Points to \ndistribute over Strength, Stamina, and Charisma.")
+
+    # Initialize stats as None to enter the loop.
     char_str = None
     char_sta = None
     char_cha = None
