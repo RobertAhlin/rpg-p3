@@ -109,8 +109,8 @@ Game play mechanics
 
 There is one main story in the Google Sheet document.
 Each section of the game has its on row in the sheet.
-Each line in the sheet will be checked if its been used. If not it will be marked by an "x" to be able to continue.
-The lenght of the sentencies are set to mach the width of the console. Just so the row brake doesn't happen within a word. Also the text block are small enough to fit within the console windows to prevent the need of scrolling to read the text.
+Each line in the sheet will be checked if its been used. If not it will be printed and marked by an "x" to be able to continue.
+The lenght of the sentencies are set to mach the width of the console. Just so the row brake doesn't happen within a word. Also the text block are small enough to fit within the console windows to prevent the need of scrolling to read the text.<br>
 <img src="readmefiles/google-sheet_01.jpg" alt="Example from a marked google sheet row"><br>
 If the text in the story ends with "Time to roll your dice:" it will trigger next roll dice event.<br>
 <img src="readmefiles/google-sheet_02.jpg" alt="Example from text ending with Time to roll your dice:"><br>
@@ -121,15 +121,13 @@ The roll dice event will add the value from a dice roll (1-6) with the stats fro
 Error handling
 
 The game has error handling to:
-<ul>
-<li>Check the API connection to Google Sheet.</li>
-<li>Check that "rpg_p3" Google Sheet exists.</li>
-<li>Restrict the player name only to alphabetical letters and max 20 character long.</li>
-<li>Restrict the character name only to alphabetical letters and max 20 character long.</li>
-<li>Set the total value of character stats to 12.</li>
-<li>Make sure the player only enter numbers for stats.</li>
-<li></li>
-</ul>
+
+- Check the API connection to Google Sheet.
+- Check that "rpg_p3" Google Sheet exists.
+- Restrict the player name only to alphabetical letters and max 20 character long.
+- Restrict the character name only to alphabetical letters and max 20 character long.
+- Set the total value of character stats to 12.
+- Make sure the player only enter numbers for stats.
 
 ## <a id="finalising"></a>Finalising
 
@@ -169,7 +167,7 @@ So I changed it to update each cell individually. Not pretty, I know, but couldn
 
 Validating
 
-I googled for any PEP8 and Python code validators, but could find anyone working. Some just threw errors on the API credentials and some didn't work at all. After spending some time to find a validator that worked I gave up. 
+I googled for any PEP8 and Python code validators, but could not find anyone working. Some just threw errors on the API credentials and some didn't work at all. After spending some time to find a validator that worked I gave up. 
 
 ### <a id="bugs"></a>Bugs?
 
@@ -192,8 +190,6 @@ The site was deployed to Heroku. Using the Code institute guidence from Love San
     <li>I added the buildpacks Python and Nodejs</li>
     <li>In the Deploy tab I connected to GitHub repository "rpg-p3"</li>
     <li>I manually deployed branch (main)</li>
-    <li></li>
-    <li></li>
     </ol>
 </ul>
 Link to the game at Heroku: <a href="https://rpg-p3-40e9a3ed28c2.herokuapp.com/" target="_blank">https://rpg-p3-40e9a3ed28c2.herokuapp.com/</a>
@@ -209,4 +205,4 @@ Link to the game at Heroku: <a href="https://rpg-p3-40e9a3ed28c2.herokuapp.com/"
 
 ### <a id="acknowledgements"></a>Acknowledgements
 
-- Thanks David Calikes for jumping in on short notice to take a meeting when mentor was not available. And thank you for valuable advices.
+- Thanks David Calikes for jumping in on short notice to take a meeting when mentor was not available. And thanks for valuable advices.
