@@ -183,21 +183,20 @@ I got stuck several times in order to figure out different things but that all a
 ## <a id="deployment"></a>Deployment
 
 The site was deployed to Heroku. Using the Code institute guidence from Love Sandwiches walkthrough.
-<ul>
-<li>I used the GitHub template to create my own repository.</li>
-<li>Used Codeanywhere as IDE.</li>
-<li>Made a Google sheet and set up the API according to the videos in the Love Sandwiches walkthrough.</li>
-<li>I deployed the project to Heroku going through these steps.</li>
-    <ol>
-    <li>Create new app</li>
-    <li>Named it: rpg-p3 (Short for Role Playing Game - Project 3)</li>
-    <li>Choose Europe as region</li>
-    <li>I went to the Settings tab to create config vars for CREDS and PORT</li>
-    <li>I added the buildpacks Python and Nodejs</li>
-    <li>In the Deploy tab I connected to GitHub repository "rpg-p3"</li>
-    <li>I manually deployed branch (main)</li>
-    </ol>
-</ul>
+
+- I used the GitHub template to create my own repository.
+- Used Codeanywhere as IDE.
+- Made a Google sheet and set up the API according to the videos in the Love Sandwiches walkthrough.
+- I deployed the project to Heroku going through these steps.
+    1. Create new app.
+    2. Named it: rpg-p3 (Short for Role Playing Game - Project 3).
+    3. Choose Europe as region.
+    4. I went to the Settings tab to create config vars for CREDS and PORT.
+    5. I added the buildpacks Python and Nodejs.
+    6. In the Deploy tab I connected to GitHub repository "rpg-p3".
+    7. I manually deployed branch (main).
+    
+
 Link to the game at Heroku: <a href="https://rpg-p3-40e9a3ed28c2.herokuapp.com/" target="_blank">https://rpg-p3-40e9a3ed28c2.herokuapp.com/</a>
 
 ## <a id="credits"></a>Credits
