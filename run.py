@@ -218,19 +218,6 @@ def reset_story():
     print("Story resetted.")
     
 
-def end_now():
-    while True:
-        # Ask if the player wants to continue or quit.
-        if not ask_to_continue():
-            # Ask if the player wants to reset or save.
-            choice = reset_or_save()
-            if choice == 'reset':
-                # Reset game (remove "x" from column A)
-                reset_story()
-                break
-            elif choice == 'save':
-                break
-
 def dice_roll_fight():
     """
     Perform a dice roll and display the result.
