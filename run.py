@@ -187,10 +187,15 @@ def roll_dice_and_display(char_stat, message):
 
             return result
         elif choice == 'n':
-            print("You chose not to roll the dice. Ending the game.")
+            print("You chose not to roll the dice.")
+            # Remove the last "x" from the story sheet
+            story_sheet = SHEET.worksheet('story')
+            last_x_cell = story_sheet.findall('x')[-1]
+            story_sheet.update_cell(last_x_cell.row, 1, '')
             return False
         else:
             print("Invalid choice. Please enter 'y' to roll or 'n' to end the game.")
+
 
 def ask_to_continue():
     """
