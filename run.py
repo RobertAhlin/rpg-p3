@@ -33,6 +33,29 @@ except (Exception, SpreadsheetNotFound) as e:
     else:
         print(f"Sorry, there was an error authorizing Google Sheets API: {e}")
     exit(1)
+print(GREEN + "In the heart of an enchanted forest, lived an elf like no other." + DEFAULT_COLOR)
+print(GREEN + "Its journey would prove that in the whimsical woods, the ordinary" + DEFAULT_COLOR)
+print(GREEN + "becomes extraordinary. Prepare to be enchanted, entertained, and" + DEFAULT_COLOR)
+print(GREEN + "above all, to laugh until your heart's content." + DEFAULT_COLOR)
+
+print(GREEN + 'First, you get to make your own character by giving them a name and' + DEFAULT_COLOR)
+print(GREEN + 'deciding how strong, tough, and friendly they are. You have to use' + DEFAULT_COLOR)
+print(GREEN + "your Character Points (CP) carefully because you can't use too many." + DEFAULT_COLOR)
+
+print(GREEN + "Read the Story: The game will show you a story. It's like a fairy" + DEFAULT_COLOR)
+print(GREEN + 'tale or an adventure.' + DEFAULT_COLOR)
+
+print(GREEN + 'Continue or Quit: After reading a part of the story, you can' + DEFAULT_COLOR)
+print(GREEN + 'choose to keep playing or stop. If you want to stop, you can either' + DEFAULT_COLOR)
+print(GREEN + 'reset the game or save your progress and stop for now. Just remeber' + DEFAULT_COLOR)
+print(GREEN + 'you character name. Use "c" key to continue, "q" key to quit.' + DEFAULT_COLOR)
+
+print(GREEN + "Roll the Dice: Sometimes, the story will tell you to roll a special" + DEFAULT_COLOR)
+print(GREEN + 'dice. You can say "yes" ("y" key) to roll it or "no" ("n" key)' + DEFAULT_COLOR)
+print(GREEN + 'to skip it.' + DEFAULT_COLOR)
+
+print(GREEN + "\nHave Fun: Just follow the story" + DEFAULT_COLOR)
+print(GREEN + "and see what happens to your character.\n" + DEFAULT_COLOR)
 
 def set_player():
     """
@@ -316,7 +339,7 @@ def main():
         if storyline is not None:
             print(YELLOW + storyline + DEFAULT_COLOR)
 
-            # Check if the story text ends with different criteria.
+            # Check if the story text endqs with different criteria.
             if storyline.endswith("Time to roll your dice:") and trigger == 1:
                 dice_roll_fight()
                 SHEET.worksheet('diceroll').update_acell('C1', 2)
@@ -329,7 +352,7 @@ def main():
                 dice_roll_meeting()
                 SHEET.worksheet('diceroll').update_acell('C1', 1)
 
-            elif storyline.endswith("The end!"):
+            if storyline.endswith("The end!"):
                 reset_story()
             
             if not ask_to_continue():
