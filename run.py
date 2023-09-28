@@ -240,7 +240,7 @@ def reset_story():
     # Reset the dice roll trigger to 1.
     SHEET.worksheet('diceroll').update_acell('C1', 1)
 
-    print("Story resetted.")
+    print("Story reset.")
     
 
 def dice_roll_fight():
@@ -342,7 +342,7 @@ def end_game():
     # Reset the dice roll trigger to 1.
     SHEET.worksheet('diceroll').update_acell('C1', 1)
 
-    print("Story resetted.")
+    print("Game reset.")
     
 
 def main():
@@ -375,6 +375,7 @@ def main():
                 ending = input("Hit 'Enter' key to reset and reboot game.\n").lower()
                 end_game()
                 break
+                
 
             if not ask_to_continue():
                 choice = reset_or_save()
