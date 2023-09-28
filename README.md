@@ -109,9 +109,11 @@ Game play mechanics
 
 There is one main story in the Google Sheet document.
 Each section of the game has its on row in the sheet.
-Each line in the sheet will be checked if its been used. If not it will be printed and marked by an "x" to be able to continue.
+Each line in the sheet will be checked if its been used. If not it will be printed and marked with "x" to be able to continue.
 The lenght of the sentencies are set to mach the width of the console. Just so the row brake doesn't happen within a word. Also the text block are small enough to fit within the console windows to prevent the need of scrolling to read the text.<br>
 <img src="readmefiles/google-sheet_01.jpg" alt="Example from a marked google sheet row"><br>
+To mark the row with "x" also gives the benefits to manually remove the "x" in the sheet to be able to run that text block over and over again in the console while testing.<br>
+
 If the text in the story ends with "Time to roll your dice:" it will trigger next roll dice event.<br>
 <img src="readmefiles/google-sheet_02.jpg" alt="Example from text ending with Time to roll your dice:"><br>
 

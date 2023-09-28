@@ -324,7 +324,7 @@ def main():
     while True:
         storyline = get_story()
         trigger = int(SHEET.worksheet('diceroll').acell('C1').value)
-        print(f"Current trigger value: {trigger}")
+        
         if storyline is not None:
             print(YELLOW + storyline + DEFAULT_COLOR)
 
@@ -340,6 +340,9 @@ def main():
             elif storyline.endswith("Time to roll your dice:") and trigger == 3:
                 dice_roll_meeting()
                 SHEET.worksheet('diceroll').update_acell('C1', 1)
+
+            if storyline.endswith("The End!"):
+                reset_story()
             
             if not ask_to_continue():
                 choice = reset_or_save()
