@@ -328,6 +328,23 @@ def dice_roll_meeting():
             print(YELLOW + cell_value + DEFAULT_COLOR)
             break
 
+def end_game():
+    # Remove all "x" values from the "story" sheet
+    story_sheet = SHEET.worksheet('story')
+    column_a_values = story_sheet.col_values(1)
+    
+    for i, value in enumerate(column_a_values):
+        if value == 'x':
+            story_sheet.update_cell(i + 1, 1, '')
+
+    # Clear row 2 in the "player" sheet
+    SHEET.worksheet('player').delete_rows(2)
+    # Reset the dice roll trigger to 1.
+    SHEET.worksheet('diceroll').update_acell('C1', 1)
+
+    print("Story resetted.")
+    
+
 def main():
     """
     Main game function to handle "game mechanics".
@@ -355,8 +372,10 @@ def main():
                 SHEET.worksheet('diceroll').update_acell('C1', 1)
 
             if storyline.endswith("The end!"):
-                reset_story()
-            
+                ending = input("Hit 'Enter' key to reset and reboot game.\n").lower()
+                end_game()
+                break
+
             if not ask_to_continue():
                 choice = reset_or_save()
                 if choice == 'reset':
