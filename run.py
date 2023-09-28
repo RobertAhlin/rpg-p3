@@ -95,13 +95,13 @@ def set_player():
 
             # Check if the sum of the stats is less than or equal to "cp".
             if char_str + char_sta + char_cha <= cp:
-                break  # Exit the loop if the input is valid.
+                break  # Exit the loop if the input is ok.
             else:
                 print(f"Total Character Points exceed {cp}. Reenter values.")
         except ValueError:
             print("Please enter numeric values only.")
 
-    # Shoow valid values for char_str, char_sta, and char_cha to player
+    # Show entered values to player.
     print(f"Welcome to the world {char_name}! Your stats are:")
     print(f"Strength: {char_str}\nStamina: {char_sta}\nCharisma: {char_cha}")
     print("Game starting...")

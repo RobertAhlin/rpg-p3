@@ -1,13 +1,13 @@
-# <a id="the-game"></a>RPG - Text (console) based role playing game.
+# <a id="the-game"></a>RPG - Text (console) based role-playing game.
 <img src="readmefiles/dragon-elf-img.jpg" alt="Fantasy picture of a dragon and a female elf."><br>
 ## Third project at Code Institute
 
 Welcome to a fantasy adventure.<br>
-A role playing text game.
+A role-playing text game.
 
 # <a id="table-of-content"></a>Table of Content
 
-- <a href="#the-game">RPG - Text (console) based role playing game.</a>
+- <a href="#the-game">RPG - Text (console) based role-playing game.</a>
 - <a href="#table-of-content">Table of Content</a>
 - <a href="#demo">Demo</a>
 - <a href="#user-experience">User Experience</a>
@@ -19,19 +19,19 @@ A role playing text game.
   - <a href="#surface">Surface</a>
 - <a href="#technologies">Technologies</a>
 - <a href="#features">Features</a>
-- <a href="#finalising">Finalising</a>
+- <a href="#finalizing">Finalizing</a>
 - <a href="#more-features">More Features</a>
 - <a href="#testing">Testing</a>
   - <a href="#bugs">Bugs</a>
 - <a href="#deployment">Deployment</a>
 - <a href="#credits">Credits</a>
-  - <a href="#acknowledgements">Acknowledgements</a>
+  - <a href="#acknowledgments">Acknowledgments</a>
 
 # <a id="demo"></a>Demo
 
 The live link to Heroku can be found here - <a href="https://rpg-p3-40e9a3ed28c2.herokuapp.com/" target="_blank">https://rpg-p3-40e9a3ed28c2.herokuapp.com/</a>
 
-The idea for this project it to make a playable textbased role playing game with a really humorous twist. I kind of had a story in my head, but to save time on writing text, I used ChatGPT to generate the text. I've edited some to make it fit more to the game play.
+The idea for this project it to make a playable textbased role-playing game with a really humorous twist. I kind of had a story in my head, but to save time on writing text, I used ChatGPT to generate the text. I've edited some to make it fit more to the game play.
 
 # <a id="user-experience"></a>User Experience
 
@@ -49,8 +49,8 @@ A player should:
 
 ### <a id="strategy"></a>Strategy
 
-I aimed for a text based role playing game where a player should be able to create and name a character with some simple stats. The characters stats combined with dice rolls would determine the outcome. For example: If the character has more strength it will be able to fight the dragon. If it has more charisma it will be more "lucky with partners". Even if the main story will end up the same, there will be three different side events from every time the dice rolls.
-The story should be able to be editied easily in a Google Sheet. That will act as a database for the storyline, dice roll events and saving player and character.
+I aimed for a text based role-playing game where a player should be able to create and name a character with some simple stats. The characters stats combined with dice rolls would determine the outcome. For example: If the character has more strength it will be able to fight the dragon. If it has more charisma it will be more "lucky with partners". Even if the main story will end up the same, there will be three different side events from every time the dice rolls.
+The story should be able to be edited easily in a Google Sheet. That will act as a database for the story, dice roll events and saving player and character.
 
 ### <a id="scope"></a>Scope
 
@@ -65,7 +65,7 @@ I had to choose not to include many of my ideas. Some examples can be found in t
 
 ### <a id="skeleton"></a>Skeleton
 
-There is not much of a skeleton to mension here. All the code is in the run python file. Credentials for the API in another file that is put is set to the .gitignore so the credentials will not be visible.
+There is not much of a skeleton to mention here. All the code is in the run python file. Credentials for the API in another file that is put is set to the .gitignore so the credentials will not be visible.
 
 **Wireframe**
 
@@ -75,7 +75,7 @@ When starting this project I tried to get my ideas in to a word document.<br>
 ### <a id="surface"></a>Surface
 
 What is possible to do with a text based game?
-I wanted the player to experince some visual features that will happen for different event.
+I wanted the player to experience some visual features that will happen for different event.
 - First I added some ascii art. I used a dragon.
 - Second, I wanted the story text to stand out from the "console text" so I found a way to colorize the text. The story text as yellow and dice rolls as blue text. 
 <img src="readmefiles/roll-dice-event.jpg" alt="Image example of text came with yellow story text and blue roll dice event text.">
@@ -109,8 +109,8 @@ Game play mechanics
 
 There is one main story in the Google Sheet document.
 Each section of the game has its on row in the sheet.
-Each line in the sheet will be checked if its been used. If not it will be printed and marked with "x" to be able to continue.
-The lenght of the sentencies are set to mach the width of the console. Just so the row brake doesn't happen within a word. Also the text block are small enough to fit within the console windows to prevent the need of scrolling to read the text.<br>
+Each line in the sheet will be checked if it's been used. If not it will be printed and marked with "x" to be able to continue.
+The length of the sentences are set to mach the width of the console. Just so the row brake doesn't happen within a word. Also the text block are small enough to fit within the console windows to prevent the need of scrolling to read the text.<br>
 <img src="readmefiles/google-sheet_01.jpg" alt="Example from a marked google sheet row"><br>
 To mark the row with "x" also gives the benefits to manually remove the "x" in the sheet to be able to run that text block over and over again in the console while testing.<br>
 
@@ -131,7 +131,7 @@ The game has error handling to:
 - Set the total value of character stats to 12.
 - Make sure the player only enter numbers for stats.
 
-## <a id="finalising"></a>Finalising
+## <a id="finalizing"></a>Finalizing
 
 <img src="readmefiles/screenshot_03.jpg" alt="Image of the Heroku console when game is in action"><br>
 
@@ -144,14 +144,14 @@ It feels like this game can be expanded to endless.
 - Option to go for different storylines.
 - Feature to be able to answer the riddles.
 - Different event can upgrade the character stats.
-- Create a garphic interface.
+- Create a graphic interface.
 
 
 ## <a id="testing"></a>Testing
 
 Through the developing of the game I made sure I had something to run in the console. So whenever I made something I tested it. So continuesly testing the game has been important.
 
-I started to stuggle a bit with updating cells in google sheet.
+I started to struggle a bit with updating cells in google sheet.
 I wanted the cells to update with one row of data:<br>
      ```character_data = [player_name, char_name, char_str, char_sta, char_cha] ```<br>
      ```player_sheet.update("A2:E2", [character_data]) ```
@@ -178,7 +178,7 @@ I googled for any PEP8 and Python code validators, but could not find anyone wor
 ### <a id="bugs"></a>Bugs?
 
 I haven't really encountered any bugs in this project.<br>
-I got stuck severel times in order to figure out different things but that all about learning.
+I got stuck several times in order to figure out different things but that all about learning.
 
 ## <a id="deployment"></a>Deployment
 
@@ -186,12 +186,12 @@ The site was deployed to Heroku. Using the Code institute guidence from Love San
 <ul>
 <li>I used the GitHub template to create my own repository.</li>
 <li>Used Codeanywhere as IDE.</li>
-<li>Made a Google sheet and set up the API acording to the videos in the Love Sandwiches walkthrough.</li>
-<li>I deployed the project to Heroku goint through these steps.</li>
+<li>Made a Google sheet and set up the API according to the videos in the Love Sandwiches walkthrough.</li>
+<li>I deployed the project to Heroku going through these steps.</li>
     <ol>
     <li>Create new app</li>
     <li>Named it: rpg-p3 (Short for Role Playing Game - Project 3)</li>
-    <li>Choosed Europe as region</li>
+    <li>Choose Europe as region</li>
     <li>I went to the Settings tab to create config vars for CREDS and PORT</li>
     <li>I added the buildpacks Python and Nodejs</li>
     <li>In the Deploy tab I connected to GitHub repository "rpg-p3"</li>
@@ -209,6 +209,6 @@ Link to the game at Heroku: <a href="https://rpg-p3-40e9a3ed28c2.herokuapp.com/"
 <li>Adobe Photoshop to edit the dragon-elf image for this readme.</li>
 </ul>
 
-### <a id="acknowledgements"></a>Acknowledgements
+### <a id="acknowledgments"></a>Acknowledgments
 
-- Thanks David Calikes for jumping in on short notice to take a meeting when mentor was not available. And thanks for valuable advices.
+- Thanks David Calikes for jumping in on short notice to take a meeting when mentor was not available. And thanks for several pieces of advice.
