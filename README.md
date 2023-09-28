@@ -202,12 +202,13 @@ Link to the game at Heroku: <a href="https://rpg-p3-40e9a3ed28c2.herokuapp.com/"
 
 ## <a id="credits"></a>Credits
 
-<ul>
-<li>For this project I want to credit the Google search engine. It's hard to remember how to write all codes.</li>
-<li>A lot of help comes from search hits at the "stack overflow" forums.</li>
-<li>The game story written by ChatGPT with my instructions of a fantasy story including hilarious adventures of an elf and a dragon.</li>
-<li>Adobe Photoshop to edit the dragon-elf image for this readme.</li>
-</ul>
+
+- For this project I want to credit the Google search engine. It's hard to remember how to write all codes.
+- A lot of help comes from search hits at the "stack overflow" forums.
+- The game story written by ChatGPT with my instructions of a fantasy story including hilarious adventures of an elf and a dragon.
+- Adobe Photoshop to edit the dragon-elf image for this readme.
+- Using <a href="https://www.online-spellcheck.com/" target="_blank">https://www.online-spellcheck.com/</a> for spelling.
+
 
 ### <a id="acknowledgments"></a>Acknowledgments
 
