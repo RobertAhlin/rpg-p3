@@ -44,7 +44,7 @@ def set_player():
     while True:
         player_name = input("Enter your name:\n")
         if player_name.isalpha() and len(player_name) <= 20:
-            player_name = player_name.capitalize()  # Set the first letter to uppercase.
+            player_name = player_name.capitalize()  # Set first letter to uppercase.
             break
         else:
             print("Your name must have only letters and be a max 20 characters.")
@@ -58,10 +58,10 @@ def set_player():
         char_name = input("Enter a character name:\n")
 
         player_sheet = SHEET.worksheet('player')
-        existing_char_name_cell = player_sheet.acell('B2')
+        existing_char_name_value = player_sheet.acell('B2')
         
         # Get any existing character name from google sheet.
-        existing_char_name = existing_char_name_cell.value.strip() if existing_char_name_cell.value else None
+        existing_char_name = existing_char_name_value.value.strip() if existing_char_name_value.value else None
 
         if char_name.isalpha() and len(char_name) <= 20:
             char_name = char_name.capitalize()
@@ -163,7 +163,7 @@ def roll_dice_and_display(char_stat, message):
 
             # Display the result of the dice roll
             print(BLUE + f"{message} {dice_value}" + DEFAULT_COLOR)
-            print(BLUE + f"Your dice roll combined with your character's stat gives you the power of {result}" + DEFAULT_COLOR)
+            print(BLUE + f"Your dice roll combined with your character's stats gives you the power of {result}" + DEFAULT_COLOR)
 
             return result
         elif choice == 'n':
@@ -198,7 +198,8 @@ def reset_or_save():
         elif choice == 's':
             return 'save'
         else:
-            print("Invalid choice. Please enter 'r' to reset or 's' to save and quit.")
+            print("Invalid choice.")
+            print("Please enter 'r' to reset or 's' to save and quit.")
 
 def reset_story():
     # Remove all "x" values from the "story" sheet
@@ -233,10 +234,11 @@ def end_now():
 def dice_roll_fight():
     """
     Perform a dice roll and display the result.
-    Then, depending on the result, print the corresponding row from the 'diceroll' sheet.
+    Then, depending on the result,
+    print the corresponding row from the 'diceroll' sheet.
     """
     char_str_value = SHEET.worksheet('player').acell('C2').value
-    message = "With a roll of the dice combined with your strength, you invoke a surge\nof luck and chance. The dice dance through the air,\nand as they land, they reveal their outcome:"
+    message = "With a roll of the dice combined with your strength, you invoke a surge\nof luck and chance. The dice dance through the air,\nand as it land, it reveal the outcome:"
     result = roll_dice_and_display(char_str_value, message)
     
     row = []  # Initialize row
@@ -245,7 +247,7 @@ def dice_roll_fight():
         # Get the "diceroll" sheet
         diceroll_sheet = SHEET.worksheet('diceroll')
         
-        # Determine which row to print based on the dice roll result
+        # Decides which row to print based on the dice roll result.
         if 0 <= result < 4:
             row = diceroll_sheet.row_values(2)
         elif 4 <= result < 7:
@@ -264,9 +266,8 @@ def dice_roll_journey():
     Then, depending on the result of the dice roll combined with
     strength and stamina, print the corresponding row from the 'diceroll' sheet.
     """
-    char_str_value = SHEET.worksheet('player').acell('C2').value
     char_sta_value = SHEET.worksheet('player').acell('D2').value
-    message = "With a roll of the dice combined with your stamina, you invoke a surge\nof luck and chance. The dice dance through the air,\nand as they land, they reveal their outcome:"
+    message = "With a roll of the dice combined with your stamina, you invoke a surge\nof luck and chance. The dice dance through the air,\nand as it land, it reveal the outcome:"
     result = roll_dice_and_display(char_sta_value, message)
     row = []
 
@@ -274,7 +275,7 @@ def dice_roll_journey():
         # Connect the "diceroll" sheet.
         diceroll_sheet = SHEET.worksheet('diceroll')
 
-        # Determine which row to print based on the dice roll result.
+        # Decides which row to print based on the dice roll result.
         if 0 <= result < 4:
             row = diceroll_sheet.row_values(6)
         elif 4 <= result < 7:
@@ -294,7 +295,7 @@ def dice_roll_meeting():
     print the corresponding row from the 'diceroll' sheet.
     """
     char_cha_value = SHEET.worksheet('player').acell('E2').value
-    message = "With a roll of the dice combined with your charisma, you invoke a surge\nof luck and chance. The dice dance through the air,\nand as they land, they reveal their outcome:"
+    message = "With a roll of the dice combined with your charisma, you invoke a surge\nof luck and chance. The dice dance through the air,\nand as it land, it reveal the outcome:"
     result = roll_dice_and_display(char_cha_value, message)
     row = []
 
@@ -340,9 +341,6 @@ def main():
             elif storyline.endswith("Time to roll your dice:") and trigger == 3:
                 dice_roll_meeting()
                 SHEET.worksheet('diceroll').update_acell('C1', 1)
-
-            if storyline.endswith("The End!"):
-                reset_story()
             
             if not ask_to_continue():
                 choice = reset_or_save()
