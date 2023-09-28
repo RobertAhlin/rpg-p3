@@ -329,7 +329,7 @@ def main():
         if storyline is not None:
             print(YELLOW + storyline + DEFAULT_COLOR)
 
-            # Check if the storyline says it's time to roll dice.
+            # Check if the story text ends with different criteria.
             if storyline.endswith("Time to roll your dice:") and trigger == 1:
                 dice_roll_fight()
                 SHEET.worksheet('diceroll').update_acell('C1', 2)
@@ -341,6 +341,9 @@ def main():
             elif storyline.endswith("Time to roll your dice:") and trigger == 3:
                 dice_roll_meeting()
                 SHEET.worksheet('diceroll').update_acell('C1', 1)
+
+            elif storyline.endswith("The end!"):
+                reset_story()
             
             if not ask_to_continue():
                 choice = reset_or_save()
