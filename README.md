@@ -202,7 +202,7 @@ Link to the game at Heroku: <a href="https://rpg-p3-40e9a3ed28c2.herokuapp.com/"
 ## <a id="credits"></a>Credits
 
 
-- For this project I want to credit the Google search engine. It's hard to remember how to write all codes.
+- Google search engine is frequently used. It's hard to remember how to write codes.
 - A lot of help comes from search hits at the "stack overflow" forums.
 - The game story written by ChatGPT with my instructions of a fantasy story including hilarious adventures of an elf and a dragon.
 - Adobe Photoshop to edit the dragon-elf image for this readme.
