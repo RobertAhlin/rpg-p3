@@ -245,11 +245,11 @@ def dice_roll_fight():
         diceroll_sheet = SHEET.worksheet('diceroll')
         
         # Determine which row to print based on the dice roll result
-        if 0 <= result <= 3:
+        if 0 <= result < 4:
             row = diceroll_sheet.row_values(2)
-        elif 4 <= result <= 6:
+        elif 4 <= result < 7:
             row = diceroll_sheet.row_values(3)
-        elif 7 <= result <= 9:
+        elif 7 <= result:
             row = diceroll_sheet.row_values(4)
 
         # Print the corresponding row
@@ -274,11 +274,11 @@ def dice_roll_journey():
         diceroll_sheet = SHEET.worksheet('diceroll')
 
         # Determine which row to print based on the dice roll result.
-        if 0 <= result <= 3:
+        if 0 <= result < 4:
             row = diceroll_sheet.row_values(6)
-        elif 4 <= result <= 6:
+        elif 4 <= result < 7:
             row = diceroll_sheet.row_values(7)
-        elif 7 <= result <= 9:
+        elif 7 <= result:
             row = diceroll_sheet.row_values(8)
 
         # Print the corresponding row.
@@ -302,11 +302,11 @@ def dice_roll_meeting():
         diceroll_sheet = SHEET.worksheet('diceroll')
 
         # Decides which row to print based on the dice roll result.
-        if 0 <= result <= 3:
+        if 0 <= result < 4:
             row = diceroll_sheet.row_values(10)
-        elif 4 <= result <= 6:
+        elif 4 <= result < 7:
             row = diceroll_sheet.row_values(11)
-        elif 7 <= result <= 9:
+        elif 7 <= result:
             row = diceroll_sheet.row_values(12)
 
         # Print the right row.
