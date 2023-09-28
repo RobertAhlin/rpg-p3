@@ -107,7 +107,7 @@ def set_player():
     print("Game starting...")
 
     # Open the "player" sheet
-    player_sheet = SHEET.worksheet('player')   
+    player_sheet = SHEET.worksheet('player')
     player_sheet.update_acell('A2', player_name)
     player_sheet.update_acell('B2', char_name)
     player_sheet.update_acell('C2', char_str)
@@ -210,8 +210,9 @@ def reset_story():
             story_sheet.update_cell(i + 1, 1, '')
 
     # Clear row 2 in the "player" sheet
-    player_sheet = SHEET.worksheet('player')
-    player_sheet.delete_rows(2)
+    SHEET.worksheet('player').delete_rows(2)
+    # Reset the dice roll trigger to 1.
+    SHEET.worksheet('diceroll').update_acell('C1', 1)
 
     print("Story resetted.")
     
@@ -265,8 +266,8 @@ def dice_roll_journey():
     """
     char_str_value = SHEET.worksheet('player').acell('C2').value
     char_sta_value = SHEET.worksheet('player').acell('D2').value
-    message = "With a roll of the dice combined with your strength, you invoke a surge\nof luck and chance. The dice dance through the air,\nand as they land, they reveal their outcome:"
-    result = roll_dice_and_display(char_str_value, message)
+    message = "With a roll of the dice combined with your stamina, you invoke a surge\nof luck and chance. The dice dance through the air,\nand as they land, they reveal their outcome:"
+    result = roll_dice_and_display(char_sta_value, message)
     row = []
 
     if result is not False:
@@ -311,7 +312,7 @@ def dice_roll_meeting():
 
         # Print the right row.
         for cell_value in row:
-            print(YELLOW + cell_value + END_COLOR)
+            print(YELLOW + cell_value + DEFAULT_COLOR)
             break
 
 def main():
@@ -319,27 +320,27 @@ def main():
     Main game function to handle "game mechanics".
     """
     set_player()
-    trigger = 1
+    
     while True:
         storyline = get_story()
-
+        trigger = int(SHEET.worksheet('diceroll').acell('C1').value)
+        print(f"Current trigger value: {trigger}")
         if storyline is not None:
             print(YELLOW + storyline + DEFAULT_COLOR)
 
             # Check if the storyline says it's time to roll dice.
             if storyline.endswith("Time to roll your dice:") and trigger == 1:
                 dice_roll_fight()
-                trigger = 2
+                SHEET.worksheet('diceroll').update_acell('C1', 2)
 
             elif storyline.endswith("Time to roll your dice:") and trigger == 2:
                 dice_roll_journey()
-                trigger = 3
+                SHEET.worksheet('diceroll').update_acell('C1', 3)
 
             elif storyline.endswith("Time to roll your dice:") and trigger == 3:
                 dice_roll_meeting()
-                trigger = 1
+                SHEET.worksheet('diceroll').update_acell('C1', 1)
             
-
             if not ask_to_continue():
                 choice = reset_or_save()
                 if choice == 'reset':

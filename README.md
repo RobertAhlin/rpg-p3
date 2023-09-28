@@ -165,6 +165,10 @@ So I changed it to update each cell individually. Not pretty, I know, but couldn
      ```player_sheet.update_acell('D2', char_sta)```<br>
      ```player_sheet.update_acell('E2', char_cha)```<br>
 
+I also encountered this:<br>
+    ```gspread.exceptions.APIError: {'code': 429, 'message': "Quota exceeded for quota metric 'Read requests' and limit 'Read requests per minute per user' of service 'sheets.googleapis.com' for consumer...```<br>
+I'm guessing I can't access the google sheet when testing and just hitting continue over and over too fast.
+
 Validating
 
 I googled for any PEP8 and Python code validators, but could not find anyone working. Some just threw errors on the API credentials and some didn't work at all. After spending some time to find a validator that worked I gave up. 
