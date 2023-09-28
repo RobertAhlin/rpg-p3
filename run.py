@@ -36,9 +36,9 @@ except (Exception, SpreadsheetNotFound) as e:
 print(GREEN + "In the heart of an enchanted forest, lived an elf like no other." + DEFAULT_COLOR)
 print(GREEN + "Its journey would prove that in the whimsical woods, the ordinary" + DEFAULT_COLOR)
 print(GREEN + "becomes extraordinary. Prepare to be enchanted, entertained, and" + DEFAULT_COLOR)
-print(GREEN + "above all, to laugh until your heart's content." + DEFAULT_COLOR)
+print(GREEN + "above all, to laugh until your heart's happy." + DEFAULT_COLOR)
 
-print(GREEN + 'First, you get to make your own character by giving them a name and' + DEFAULT_COLOR)
+print(GREEN + '\nFirst, you get to make your own character by giving them a name and' + DEFAULT_COLOR)
 print(GREEN + 'deciding how strong, tough, and friendly they are. You have to use' + DEFAULT_COLOR)
 print(GREEN + "your Character Points (CP) carefully because you can't use too many." + DEFAULT_COLOR)
 
@@ -52,10 +52,7 @@ print(GREEN + 'you character name. Use "c" key to continue, "q" key to quit.' + 
 
 print(GREEN + "Roll the Dice: Sometimes, the story will tell you to roll a special" + DEFAULT_COLOR)
 print(GREEN + 'dice. You can say "yes" ("y" key) to roll it or "no" ("n" key)' + DEFAULT_COLOR)
-print(GREEN + 'to skip it.' + DEFAULT_COLOR)
-
-print(GREEN + "\nHave Fun: Just follow the story" + DEFAULT_COLOR)
-print(GREEN + "and see what happens to your character.\n" + DEFAULT_COLOR)
+print(GREEN + 'to skip it. Just follow the story and see what happens.\n' + DEFAULT_COLOR)
 
 def set_player():
     """
