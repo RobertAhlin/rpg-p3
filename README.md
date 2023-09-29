@@ -225,6 +225,10 @@ The site was deployed to Heroku. Using the Code institute guidence from Love San
     6. In the Deploy tab I connected to GitHub repository "rpg-p3".
     7. I manually deployed branch (main).
 
+I have in two occations experienced that Heroku stopped working and I had to redeploy branch. Seems like there is some time of timelimit?
+I truly do hope that it is still running when it is time for review.
+Otherwise just slack me (Robert Ahlin) and I will redeploy again.
+
 ## <a id="credits"></a>Credits
 
 
