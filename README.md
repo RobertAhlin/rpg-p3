@@ -91,20 +91,20 @@ I wanted the player to experience some visual features that will happen for diff
 ## <a id="flowshart"></a>Flowshart
 
 <img src="readmefiles/flowchart_01.jpg"  alt="A flowchart of the game mechanics."><br>
-<details>
-    <summary>Explaining the flowshart</summary>
-    <ul>
-    <li>Game start with a short preface for the game and also explaining some game commands.</li>
-    <li>Player enter their name and create a simple character.</li>
-    <li>Role-playing game start to get a story block from a Google Sheet.</li>
-    <li>After each text block the player is asked to continue.</li>
-    <li>The text block is checked for two different ending phrases</li>
-    <li>If a text block ends with the phase "Time to roll your dice" the player will be asked to roll</li>
-    <li>From each of the dice roll event there will be three different scenarios. Then a player is asked continue.</li>
-    <li>The game continue to the main story efter the scenario from the dice roll event.</li>
-    <li>If a text block end whith the phrase "The end!" that will trigger the ending sequense where player is asked to confirm game end.</li>
-    <li>Game will reboot.</li>
-</details>
+
+
+- Game start with a short preface for the game and also explaining some game commands.
+- Player enter their name and create a simple character.
+- Role-playing game start to get a story block from a Google Sheet.
+- After each text block the player is asked to continue.
+- The text block is checked for two different ending phrases.
+- If a text block ends with the phase "Time to roll your dice" the player will be asked to roll.
+    - From each of the dice roll event there will be three different scenarios. Then a player is asked continue.
+    - The game continue to the main story efter the scenario from the dice roll event.
+- If a text block end whith the phrase "The end!" that will trigger the ending sequense where player is asked to confirm game end.
+- Game will reboot.
+
+
 
 ## <a id="features"></a>Features
 
