@@ -18,6 +18,7 @@ A role-playing text game.
   - <a href="#skeleton">Skeleton</a>
   - <a href="#surface">Surface</a>
 - <a href="#technologies">Technologies</a>
+    - <a href="#flowshart">Flowshart</a>
 - <a href="#features">Features</a>
 - <a href="#finalizing">Finalizing</a>
 - <a href="#more-features">More Features</a>
@@ -86,6 +87,24 @@ I wanted the player to experience some visual features that will happen for diff
 2. Google Sheet API - To connect to a Google Sheet.
 3. Google Sheet - for storing the text.
 
+## <a id="flowshart"></a>Flowshart
+
+<img src="readmefiles/flowchart_01.jpg"  alt="A flowchart of the game mechanics."><br>
+<details>
+    <summary>Explaining the flowshart</summary>
+    <ul>
+    <li>Game start with a short preface for the game and also explaining some game commands.</li>
+    <li>Player enter their name and create a simple character.</li>
+    <li>Role-playing game start to get a story block from a Google Sheet.</li>
+    <li>After each text block the player is asked to continue.</li>
+    <li>The text block is checked for two different ending phrases</li>
+    <li>If a text block ends with the phase "Time to roll your dice" the player will be asked to roll</li>
+    <li>From each of the dice roll event there will be three different scenarios. Then a player is asked continue.</li>
+    <li>The game continue to the main story efter the scenario from the dice roll event.</li>
+    <li>If a text block end whith the phrase "The end!" that will trigger the ending sequense where player is asked to confirm game end.</li>
+    <li>Game will reboot.</li>
+</details>
+
 ## <a id="features"></a>Features
 
 Existing Features
@@ -99,7 +118,6 @@ Through the game it will ask if the player would like to continue or quit using 
 
 The game will also ask if the player would like to roll the dice by typing letters "y" or "n".<br>
 <img src="readmefiles/screenshot_02b.jpg" alt="Image example of option to roll dice or not."><br>
-
 
 Google Sheet
 
@@ -116,9 +134,6 @@ To mark the row with "x" also gives the benefits to manually remove the "x" in t
 
 If the text in the story ends with "Time to roll your dice:" it will trigger next roll dice event.<br>
 <img src="readmefiles/google-sheet_02.jpg" alt="Example from text ending with Time to roll your dice:"><br>
-
-The roll dice event will add the value from a dice roll (1-6) with the stats from the character and then divide it by 2 to get the average value. That value will set what text to display from the "diceroll" sheet.<br>
-<img src="readmefiles/flowchart.jpg" alt="A flowchart of the game mechanics."><br>
 
 Error handling
 
@@ -197,9 +212,6 @@ The site was deployed to Heroku. Using the Code institute guidence from Love San
     5. I added the buildpacks Python and Nodejs.
     6. In the Deploy tab I connected to GitHub repository "rpg-p3".
     7. I manually deployed branch (main).
-    
-
-Link to the game at Heroku: <a href="https://rpg-p3-40e9a3ed28c2.herokuapp.com/" target="_blank">https://rpg-p3-40e9a3ed28c2.herokuapp.com/</a>
 
 ## <a id="credits"></a>Credits
 
