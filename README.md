@@ -23,6 +23,7 @@ A role-playing text game.
 - <a href="#finalizing">Finalizing</a>
 - <a href="#more-features">More Features</a>
 - <a href="#testing">Testing</a>
+  - <a href="#validating">Validating</a> 
   - <a href="#bugs">Bugs</a>
 - <a href="#deployment">Deployment</a>
 - <a href="#credits">Credits</a>
@@ -77,7 +78,7 @@ When starting this project I tried to get my ideas in to a word document.<br>
 
 What is possible to do with a text based game?
 I wanted the player to experience some visual features that will happen for different event.
-- First I added some ascii art. I used a dragon.
+- First I added some ascii art. There is a dragon.
 - Second, I wanted the story text to stand out from the "console text" so I found a way to colorize the text. The story text as yellow and dice rolls as blue text. 
 <img src="readmefiles/roll-dice-event.jpg" alt="Image example of text came with yellow story text and blue roll dice event text.">
 
@@ -107,9 +108,14 @@ I wanted the player to experience some visual features that will happen for diff
 
 ## <a id="features"></a>Features
 
-Existing Features
+### Existing Features
 
-The player will have to be able to use a keyboard to type letters to operate the game.
+Game starting:
+The game starts with a preface and explain how to play the game.<br>
+<img src="readmefiles/preface.jpg" alt="Image example of the preface text."><br>
+
+
+The player will have to be able to use a keyboard to type letters to operate the game.<br>
 First of all to enter a name, and then create a character with name and stats.<br>
 <img src="readmefiles/screenshot_01a.jpg" alt="Image example of the game starting."><br>
 
@@ -119,18 +125,18 @@ Through the game it will ask if the player would like to continue or quit using 
 The game will also ask if the player would like to roll the dice by typing letters "y" or "n".<br>
 <img src="readmefiles/screenshot_02b.jpg" alt="Image example of option to roll dice or not."><br>
 
-Google Sheet
+### Google Sheet
 
 The game use a Google Sheet as a database. This to easily edit the text of the story. There is one sheet for the main story, one sheet for events from the roll dice, and one sheet for the player and character data.
 
-Game play mechanics
+### Game play mechanics
 
 There is one main story in the Google Sheet document.
 Each section of the game has its on row in the sheet.
-Each line in the sheet will be checked if it's been used. If not it will be printed and marked with "x" to be able to continue.
-The length of the sentences are set to mach the width of the console. Just so the row brake doesn't happen within a word. Also the text block are small enough to fit within the console windows to prevent the need of scrolling to read the text.<br>
+Each line in the sheet will be checked if it's been used. If not, it will be printed and marked with "x" to be able to continue.
+The length of the sentences are set to mach the width of the Heroku console. Just so that the row brake doesn't happen within a word. Also the text block are small enough to fit within the console windows to prevent the need of scrolling to read the text.<br>
 <img src="readmefiles/google-sheet_01.jpg" alt="Example from a marked google sheet row"><br>
-To mark the row with "x" also gives the benefits to manually remove the "x" in the sheet to be able to run that text block over and over again in the console while testing.<br>
+To mark the row with "x" also gives the benefits to manually set or remove an "x" in the sheet. For example to be able to run a specific text block over and over again in the console while testing.<br>
 
 If the text in the story ends with "Time to roll your dice:" it will trigger next roll dice event.<br>
 <img src="readmefiles/google-sheet_02.jpg" alt="Example from text ending with Time to roll your dice:"><br>
@@ -148,6 +154,7 @@ The game has error handling to:
 
 ## <a id="finalizing"></a>Finalizing
 
+A screenshot form the game running in Heroku console.<br>
 <img src="readmefiles/screenshot_03.jpg" alt="Image of the Heroku console when game is in action"><br>
 
 
@@ -158,24 +165,24 @@ It feels like this game can be expanded to endless.
 
 - Option to go for different storylines.
 - Feature to be able to answer the riddles.
-- Different event can upgrade the character stats.
+- Different events can upgrade the character stats.
 - Create a graphic interface.
 
 
 ## <a id="testing"></a>Testing
 
-Through the developing of the game I made sure I had something to run in the console. So whenever I made something I tested it. So continuesly testing the game has been important.
+Through the developing of the game I made sure I had something to run in the console. So whenever I made och changed something, I tested it. So continuesly testing the game has been important.
 
 I started to struggle a bit with updating cells in google sheet.
 I wanted the cells to update with one row of data:<br>
      ```character_data = [player_name, char_name, char_str, char_sta, char_cha] ```<br>
      ```player_sheet.update("A2:E2", [character_data]) ```
-     
-Event though it works the terminal gives me the following warning:<br>
+     <br>
+Event though it works, the terminal gives me the following warning:<br>
     " ```/home/codeany/.local/lib/python3.8/site-packages/gspread/worksheet.py:1069: UserWarning: [Deprecated][in version 6.0.0]: method signature will change to: 'Worksheet.update(value = [[]], range_name=)' arguments 'range_name' and 'values' will swap, values will be mandatory of type: 'list(list(...))'
   warnings.warn(" ```
 
-So I changed it to update each cell individually. Not pretty, I know, but couldn't find a way to get it working without a warning.<br>
+So I changed it to update each cell individually. Not pretty, I know, but couldn't find a way to get the prevoius line of code working without a warning.<br>
      ```player_sheet.update_acell('A2', player_name)```<br>
      ```player_sheet.update_acell('B2', char_name)```<br>
      ```player_sheet.update_acell('C2', char_str)```<br>
@@ -188,14 +195,14 @@ I'm guessing I can't access the google sheet when testing and just hitting conti
 
 When trying showing the game to my mentor, we discovered that we couln't have the Heroku terminal open at the same time. One had to close it.
 
-Validating
+### <a id="validating"></a>Validating
 
-I googled for any PEP8 and Python code validators, but could not find anyone working. Some just threw errors on the API credentials and some didn't work at all. After spending some time to find a validator that worked I gave up. 
+I googled for any PEP8 and Python code validators, but could not find anyone working. I think I tried like five or six different. Some just threw errors on the API credentials and some didn't work at all. After spending some time to find a validator that worked I gave up. I relying on my telling me that it looked nice.
 
 ### <a id="bugs"></a>Bugs?
 
 I haven't really encountered any bugs in this project.<br>
-I got stuck several times in order to figure out different things but that all about learning.
+I got stuck several times in order to figure out different things but that is all about learning.
 
 ## <a id="deployment"></a>Deployment
 
