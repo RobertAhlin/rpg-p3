@@ -1,6 +1,7 @@
 # <a id="the-game"></a>RPG - Text (console) based role-playing game.
 <img src="readmefiles/dragon-elf-img.jpg" alt="Fantasy picture of a dragon and a female elf."><br>
-## Third project at Code Institute
+
+<h2>Third project at Code Institute</h2>
 
 Welcome to a fantasy adventure.<br>
 A role-playing text game.
@@ -108,12 +109,11 @@ I wanted the player to experience some visual features that will happen for diff
 
 ## <a id="features"></a>Features
 
-### Existing Features
+<h3>Existing Features</h3>
 
 Game starting:
 The game starts with a preface and explain how to play the game.<br>
 <img src="readmefiles/preface.jpg" alt="Image example of the preface text."><br>
-
 
 The player will have to be able to use a keyboard to type letters to operate the game.<br>
 First of all to enter a name, and then create a character with name and stats.<br>
@@ -125,11 +125,11 @@ Through the game it will ask if the player would like to continue or quit using 
 The game will also ask if the player would like to roll the dice by typing letters "y" or "n".<br>
 <img src="readmefiles/screenshot_02b.jpg" alt="Image example of option to roll dice or not."><br>
 
-### Google Sheet
+<h3>Google Sheet</h3>
 
 The game use a Google Sheet as a database. This to easily edit the text of the story. There is one sheet for the main story, one sheet for events from the roll dice, and one sheet for the player and character data.
 
-### Game play mechanics
+<h3>Play mechanics</h3>
 
 There is one main story in the Google Sheet document.
 Each section of the game has its on row in the sheet.
@@ -141,7 +141,7 @@ To mark the row with "x" also gives the benefits to manually set or remove an "x
 If the text in the story ends with "Time to roll your dice:" it will trigger next roll dice event.<br>
 <img src="readmefiles/google-sheet_02.jpg" alt="Example from text ending with Time to roll your dice:"><br>
 
-Error handling
+<h3>Error handling</h3>
 
 The game has error handling to:
 
